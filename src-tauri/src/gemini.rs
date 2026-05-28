@@ -34,6 +34,8 @@ struct ContentResponse {
 #[derive(Deserialize)]
 struct PartResponse {
     text: String,
+    #[serde(default)]
+    thought: bool,
 }
 
 fn clean_gemini_response(response: &str) -> String {
@@ -133,7 +135,12 @@ Generate the ffmpeg command for the following request:
             .await
             .map_err(|e| e.to_string())?;
         if let Some(candidate) = gemini_response.candidates.get(0) {
-            if let Some(part) = candidate.content.parts.get(0) {
+            if let Some(part) = candidate
+                .content
+                .parts
+                .iter()
+                .find(|p| !p.thought)
+            {
                 let command = clean_gemini_response(&part.text);
                 return Ok(command);
             }
