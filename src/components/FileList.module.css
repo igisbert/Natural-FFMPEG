@@ -1,0 +1,86 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.title {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s;
+}
+
+.fileItem:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.fileIndex {
+  background-color: var(--button-background);
+  color: var(--color);
+  font-size: 0.75rem;
+  font-weight: bold;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  opacity: 0.9;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.name {
+  flex: 1;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.removeButton {
+  background: none;
+  border: none;
+  color: var(--delete-button);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  opacity: 0.6;
+  transition: all 0.2s;
+}
+
+.removeButton:hover {
+  opacity: 1;
+  background-color: rgb(from var(--delete-button) r g b / 0.1);
+}

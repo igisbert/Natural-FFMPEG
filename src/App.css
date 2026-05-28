@@ -1,0 +1,50 @@
+:root {
+  --background-color: #f6f6f6;
+  --color: #191919;
+  --ffmpeg-green: #10810c;
+  --button-background: #bababa;
+  --delete-button: #ff4b4b;
+  --loader-color: #202020;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color: var(--color);
+  background-color: var(--background-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+}
+
+.container {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #171717;
+    --color: #d7d7d7;
+    --ffmpeg-green: #87ff83;
+    --button-background: #3e3c3e;
+    --delete-button: #db3b3e;
+    --loader-color: #dadada;
+  }
+
+  a:hover {
+    color: #24c8db;
+  }
+}

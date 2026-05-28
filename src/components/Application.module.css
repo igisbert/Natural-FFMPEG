@@ -1,0 +1,140 @@
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem 0 1rem;
+}
+
+.selectedFile {
+  font-weight: bold;
+  opacity: 0.9;
+  /*   background-color: var(--selected-file-background);
+ */
+  padding: 0.5rem 1rem;
+  border-radius: 100rem;
+  /*   position: absolute;
+  top: 1rem; */
+  width: calc(100% - 2rem);
+  max-width: 1000px;
+  margin-top: 3rem;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.uploadButtonContainer {
+  max-width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.uploadButton {
+  background-color: var(--button-background);
+  color: var(--color);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  border-radius: 100rem;
+  max-width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+input {
+  height: 50px;
+}
+
+.text {
+  opacity: 0.9;
+}
+
+/* .codeBlock {
+  background-color: var(--code-background);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: left;
+  width: 100%;
+  max-width: 1100px;
+} */
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submitButton {
+  background-color: var(--button-background);
+  color: var(--color);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  border-radius: 100rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: padding 0.4s ease, gap 0.4s ease;
+}
+
+.buttonText {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 200px; /* Initial max-width */
+  transition: max-width 0.4s ease;
+}
+
+.icon {
+  width: 1.5rem;
+  aspect-ratio: 1;
+  opacity: 0.9;
+}
+
+.sparklesIcon {
+  transition: transform 0.4s ease;
+}
+
+.submitButton.loading {
+  padding: 0.6em;
+  gap: 0;
+}
+
+.submitButton.loading .buttonText {
+  max-width: 0;
+}
+
+.submitButton.loading .geminiIcon {
+  animation: rotate 1s linear infinite;
+}
+
+.submitButton:disabled {
+  color: var(--color);
+}
+
+.geminiIcon {
+  width: 1.5rem;
+  aspect-ratio: 1;
+  transition: transform 0.4s ease;
+}

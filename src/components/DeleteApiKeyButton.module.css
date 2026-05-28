@@ -1,0 +1,21 @@
+.button {
+  color: var(--delete-button);
+  background-color: transparent;
+  border: 0px solid transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.button:hover {
+  text-decoration: underline;
+}
+
+.icon {
+  width: 1.5em;
+  height: 1.5em;
+}

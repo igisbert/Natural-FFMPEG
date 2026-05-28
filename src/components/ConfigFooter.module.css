@@ -1,0 +1,69 @@
+.footer {
+  width: 100%;
+  max-width: 800px;
+  margin: 1rem auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 100rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.configItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 100rem;
+  transition: background-color 0.2s, color 0.2s;
+  max-width: 350px;
+  overflow: hidden;
+}
+
+.configItem:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.8;
+}
+
+.divider {
+  width: 1px;
+  height: 1.25rem;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgb(from var(--delete-button) r g b / 0.7);
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 100rem;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.deleteButton:hover {
+  background-color: rgb(from var(--delete-button) r g b / 0.1);
+  color: var(--delete-button);
+}
