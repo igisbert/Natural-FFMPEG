@@ -224,19 +224,7 @@ export default function Application({
   return (
     <>
       <div className={style.container}>
-        <UploadButton onClick={handleFileSelect} />
-        {/*         <div className={style.uploadButtonContainer}>
-          <button
-            type="button"
-            className={style.uploadButton}
-            onClick={handleFileSelect}
-          >
-            Añadir archivos <Upload class={style.icon} />
-          </button>
-          <label className={style.text}>
-            o arrástralos y suéltalos
-          </label>
-        </div> */}
+        <UploadButton handleFileSelect={handleFileSelect} />
 
         <FileList files={selectedFiles} onRemove={removeFile} />
 
