@@ -15,12 +15,12 @@ import { Code, Upload } from "lucide-preact";
 import { Sparkles } from "lucide-preact";
 import geminiIconUrl from "../assets/gemini.svg?url";
 import ModelSelector from "./ModelSelector";
-import modelsList from "../utils/modelsList"
+import modelsList from "../utils/modelsList";
 import DragOverlay from "./DragOverlay";
 import FileList from "./FileList";
 import ErrorMessage from "./ErrorMessage";
 import { translateGeminiError } from "../utils/geminiErrorHandler";
-
+import UploadButton from "./UploadButton";
 
 export default function Application({
   apiKey,
@@ -43,7 +43,21 @@ export default function Application({
   });
 
   const videoExtensions = [
-    "mp4", "avi", "mkv", "mov", "wmv", "flv", "webm", "mpeg", "mpg", "m4v", "3gp", "ogv", "ts", "mts", "m2ts",
+    "mp4",
+    "avi",
+    "mkv",
+    "mov",
+    "wmv",
+    "flv",
+    "webm",
+    "mpeg",
+    "mpg",
+    "m4v",
+    "3gp",
+    "ogv",
+    "ts",
+    "mts",
+    "m2ts",
   ];
   const imageExtensions = ["jpg", "jpeg", "png", "webp", "bmp", "gif"];
 
@@ -103,19 +117,23 @@ export default function Application({
 
   const processPaths = (paths) => {
     resetStates();
-    const newFiles = paths.map(path => {
-      const name = path.split(/[\\/]/).pop();
-      const extension = name.split(".").pop().toLowerCase();
-      let type = "other";
-      if (videoExtensions.includes(extension)) type = "video";
-      else if (imageExtensions.includes(extension)) type = "image";
-      
-      return { path, name, type };
-    }).filter(file => file.type !== "other");
+    const newFiles = paths
+      .map((path) => {
+        const name = path.split(/[\\/]/).pop();
+        const extension = name.split(".").pop().toLowerCase();
+        let type = "other";
+        if (videoExtensions.includes(extension)) type = "video";
+        else if (imageExtensions.includes(extension)) type = "image";
 
-    setSelectedFiles(prev => {
-      const existingPaths = prev.map(f => f.path);
-      const uniqueNewFiles = newFiles.filter(f => !existingPaths.includes(f.path));
+        return { path, name, type };
+      })
+      .filter((file) => file.type !== "other");
+
+    setSelectedFiles((prev) => {
+      const existingPaths = prev.map((f) => f.path);
+      const uniqueNewFiles = newFiles.filter(
+        (f) => !existingPaths.includes(f.path),
+      );
       return [...prev, ...uniqueNewFiles];
     });
   };
@@ -165,12 +183,12 @@ export default function Application({
 
   const removeFile = (index) => {
     resetStates();
-    setSelectedFiles(prev => prev.filter((_, i) => i !== index));
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const userPrompt = commandInput; 
+    const userPrompt = commandInput;
     if (selectedFiles.length === 0 || !userPrompt) {
       return;
     }
@@ -180,9 +198,9 @@ export default function Application({
 
     try {
       let outputFolder = await getSecret(SECRET_KEYS.OUTPUT_FOLDER);
-      
+
       const command = await invoke("generate_command", {
-        inputPaths: selectedFiles.map(f => f.path),
+        inputPaths: selectedFiles.map((f) => f.path),
         outputFolder: outputFolder,
         prompt: userPrompt,
         apiKey: apiKey,
@@ -206,7 +224,8 @@ export default function Application({
   return (
     <>
       <div className={style.container}>
-        <div className={style.uploadButtonContainer}>
+        <UploadButton onClick={handleFileSelect} />
+        {/*         <div className={style.uploadButtonContainer}>
           <button
             type="button"
             className={style.uploadButton}
@@ -217,10 +236,10 @@ export default function Application({
           <label className={style.text}>
             o arrástralos y suéltalos
           </label>
-        </div>
+        </div> */}
 
         <FileList files={selectedFiles} onRemove={removeFile} />
-        
+
         <form action="" ref={form} class={style.form} onSubmit={handleSubmit}>
           <Input
             setShowPresets={setShowPresets}

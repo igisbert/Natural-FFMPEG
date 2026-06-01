@@ -32,30 +32,6 @@
   max-width: 800px;
 }
 
-.uploadButtonContainer {
-  max-width: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.uploadButton {
-  background-color: var(--button-background);
-  color: var(--color);
-  cursor: pointer;
-  border: none;
-  outline: none;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  border-radius: 100rem;
-  max-width: fit-content;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 input {
   height: 50px;
 }
@@ -95,7 +71,9 @@ input {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  transition: padding 0.4s ease, gap 0.4s ease;
+  transition:
+    padding 0.4s ease,
+    gap 0.4s ease;
 }
 
 .buttonText {
