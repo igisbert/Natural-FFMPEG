@@ -229,9 +229,10 @@ export default function Application({
 
         <form action="" ref={form} class={style.form} onSubmit={handleSubmit}>
           <Input
-            setShowPresets={setShowPresets}
-            commandInput={commandInput}
-            setCommandInput={setCommandInput}
+            showPresetsButton
+            onPresetsClick={() => setShowPresets((currentValue) => !currentValue)}
+            value={commandInput}
+            onInput={(event) => setCommandInput(event.target.value)}
             name={"user-prompt"}
             placeholder="¡Describe con precisión lo que quieres hacer!"
           />{" "}

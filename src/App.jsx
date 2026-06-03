@@ -61,7 +61,7 @@ function App() {
         <AddAPIKey apiKeyName={apiKeyName} setApiKey={setApiKey} />
       )}
 
-      <ConfigFooter apiKey={apiKey} setApiKey={setApiKey} />
+      {apiKey && <ConfigFooter apiKey={apiKey} setApiKey={setApiKey} />}
       <Presets
         showPresets={showPresets}
         setShowPresets={setShowPresets}

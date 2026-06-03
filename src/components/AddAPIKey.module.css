@@ -10,20 +10,17 @@
 .form {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   width: 100%;
   margin-bottom: 2rem;
-  height: 50px;
+  flex-direction: column;
 }
 
-/* .form > * {
-  height: 100%;
-} */
-
-h2 {
+.title {
   margin: 0 0 0.5rem 0;
   text-wrap: balance;
   max-width: 50ch;
+  font-size: 1.75rem;
 }
 
 @keyframes fadeIn {

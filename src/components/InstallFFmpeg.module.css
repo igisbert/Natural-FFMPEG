@@ -11,4 +11,6 @@
   margin: 0;
   text-wrap: balance;
   max-width: 50ch;
+  font-size: 1.75rem;
+  line-height: 1.4;
 }

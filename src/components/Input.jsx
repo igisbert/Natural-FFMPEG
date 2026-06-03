@@ -6,18 +6,12 @@ export default function Input({
   type = "text",
   name,
   placeholder,
-  setShowPresets,
-  commandInput,
-  setCommandInput,
+  showPresetsButton = false,
+  onPresetsClick,
+  value,
+  onInput,
+  ...props
 }) {
-  const handleShowPresets = () => {
-    setShowPresets((currentValue) => !currentValue);
-  };
-
-  const handleInputChange = (event) => {
-    setCommandInput(event.target.value);
-  };
-
   return (
     <div className={styles.inputContainer}>
       <input
@@ -26,16 +20,20 @@ export default function Input({
         name={name}
         placeholder={placeholder}
         autocomplete="off"
-        value={commandInput}
-        onInput={handleInputChange}
+        value={value}
+        onInput={onInput}
+        {...props}
       />
-      <button
-        className={styles.button}
-        onClick={handleShowPresets}
-        type="button"
-      >
-        <Gem size={32} stroke-width={2} />
-      </button>
+      {showPresetsButton && (
+        <button
+          className={styles.button}
+          onClick={onPresetsClick}
+          type="button"
+        >
+          <Gem size={32} stroke-width={2} />
+        </button>
+      )}
     </div>
   );
 }
+

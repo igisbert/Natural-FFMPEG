@@ -26,7 +26,7 @@ export default function AddAPIKey({ apiKeyName, setApiKey }) {
 
   return (
     <div className={styles.container}>
-      <h2>Introduce tu API key de Gemini</h2>
+      <h2 className={styles.title}>Introduce tu API key de Gemini</h2>
       <form
         className={styles.form}
         action=""
@@ -39,11 +39,10 @@ export default function AddAPIKey({ apiKeyName, setApiKey }) {
           placeholder="Introduce tu API Key"
           label="API Key"
         />
-        {/* <button type="submit">Guardar</button> */}
         <Button type="submit">Guardar</Button>
       </form>
 
-      <h2>¿No tienes una?</h2>
+      <h2 className={styles.title}>¿No tienes una?</h2>
       <Button onClick={handleOpenUrl}>Obtener API Key</Button>
       <span>
         Se requiere una cuenta de Google con verificación de mayoría de edad
