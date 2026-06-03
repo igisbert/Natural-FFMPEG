@@ -20,6 +20,7 @@ export default function CodeBlock({ children, onRunCommand, isRunning }) {
   return (
     <>
       <div className={style.codeBlock}>
+        <h3 className={style.codeBlockTitle}>Comando generado:</h3>
         {children}
       </div>
       <footer className={style.buttonsContainer}>
@@ -33,7 +34,7 @@ export default function CodeBlock({ children, onRunCommand, isRunning }) {
           }
           disabled={isRunning}
         >
-          <Copy size={18}></Copy>
+          <Copy size={24}></Copy> Copiar
         </button>
         <button
           className={`${style.codeBlockButton} ${
@@ -45,7 +46,7 @@ export default function CodeBlock({ children, onRunCommand, isRunning }) {
           }
           disabled={isRunning}
         >
-          <Play size={18}></Play>
+          <Play size={24}></Play> Ejecutar
         </button>
       </footer>
     </>

@@ -1,10 +1,13 @@
 :root {
-  --background-color: #f6f6f6;
-  --color: #191919;
-  --ffmpeg-green: #10810c;
-  --button-background: #bababa;
-  --delete-button: #ff4b4b;
-  --loader-color: #202020;
+  --radius: 0.5rem;
+  --background-color: #11131c;
+  --color: #d7d7d7;
+  --ffmpeg-green: #87ff83;
+  --button-background: #3e3c3e;
+  --delete-button: #db3b3e;
+  --loader-color: #dadada;
+  --blue: #3d4b7f;
+  --gold: #c2b480;
 
   font-family: "Poppins", sans-serif;
   font-size: 16px;
@@ -30,21 +33,42 @@
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--blue), transparent 90%) 0 1px,
+      transparent 1px 25px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      color-mix(in srgb, var(--blue), transparent 90%) 0 1px,
+      transparent 1px 25px
+    );
+}
+
 h1 {
   text-align: center;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #171717;
+    --background-color: #11131c;
     --color: #d7d7d7;
     --ffmpeg-green: #87ff83;
     --button-background: #3e3c3e;
     --delete-button: #db3b3e;
     --loader-color: #dadada;
+    --blue: #3d4b7f;
+    --gold: #c2b480;
   }
 
   a:hover {
     color: #24c8db;
   }
 }
+ */

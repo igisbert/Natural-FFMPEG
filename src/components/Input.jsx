@@ -29,8 +29,12 @@ export default function Input({
         value={commandInput}
         onInput={handleInputChange}
       />
-      <button className={styles.button} onClick={handleShowPresets} type="button">
-        <Gem size={32} stroke-width={1.25} />
+      <button
+        className={styles.button}
+        onClick={handleShowPresets}
+        type="button"
+      >
+        <Gem size={32} stroke-width={2} />
       </button>
     </div>
   );

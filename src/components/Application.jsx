@@ -12,8 +12,7 @@ import style from "./Application.module.css";
 import Input from "./Input";
 import Button from "./Button";
 import { Code, Upload } from "lucide-preact";
-import { Sparkles } from "lucide-preact";
-import geminiIconUrl from "../assets/gemini.svg?url";
+import GeminiButton from "./GeminiButton";
 import ModelSelector from "./ModelSelector";
 import modelsList from "../utils/modelsList";
 import DragOverlay from "./DragOverlay";
@@ -234,32 +233,19 @@ export default function Application({
             commandInput={commandInput}
             setCommandInput={setCommandInput}
             name={"user-prompt"}
-            placeholder="¿Qué quieres hacer?"
+            placeholder="¡Describe con precisión lo que quieres hacer!"
           />{" "}
           <ModelSelector model={model} setModel={handleSetModel} />
-          <button
-            type="submit"
-            disabled={isLoading || selectedFiles.length === 0}
-            className={`${style.submitButton} ${
-              isLoading ? style.loading : ""
-            }`}
-          >
-            <span className={style.buttonText}>
-              {isLoading ? "Generando..." : "Obtener comando"}
-            </span>
-            <img
-              src={geminiIconUrl}
-              className={style.geminiIcon}
-              alt="Gemini Icon"
-            />
-          </button>
+          <GeminiButton
+            isLoading={isLoading}
+            disabled={selectedFiles.length === 0}
+          />
         </form>
 
         <ErrorMessage message={error.message} />
 
         {ffmpegCommand && (
-          <div className={style.resultContainer}>
-            <h3>Comando FFmpeg generado:</h3>
+          <div className={style.resultContainer} style={{ opacity: 1 }}>
             <CodeBlock
               onRunCommand={() => runCommand(ffmpegCommand)}
               isRunning={execution.status === "running"}

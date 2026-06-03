@@ -1,45 +1,49 @@
 .codeBlock {
-  background-color: var(--button-background);
+  background-color: var(--blue);
   color: var(--color);
   padding: 1.5rem;
   padding-bottom: 2.5rem;
   border-radius: 0.5rem 0.5rem 0 0;
   text-align: left;
   width: 100%;
-  max-width: 1100px;
+  max-width: 800px;
   position: relative;
   word-wrap: break-word;
+}
+
+.codeBlockTitle {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
 }
 
 .buttonsContainer {
   display: flex;
   gap: 0.5rem;
   justify-content: flex-end;
-  background-color: var(--button-background);
-  padding: .5rem 5px;
+  background-color: var(--blue);
+  padding: 0.5rem 5px;
   border-top: 1px solid var(--background-color);
-  border-radius: 0 0 .5rem .5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .codeBlockButton {
-  background-color: var(--background-color);
-  color: var(--color);
+  background-color: var(--gold);
+  color: var(--blue);
   cursor: pointer;
   border: none;
   outline: none;
-  padding: 0.8em;
-  border-radius: 50%;
+  padding: 0.8em 2rem;
+  border-radius: 10rem;
   max-width: fit-content;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  corner-shape: superellipse(1);
   transition: all 0.2s ease-in-out;
 }
 
-.codeBlockButton:hover {
+/* .codeBlockButton:hover {
   corner-shape: superellipse(2);
-}
+} */
 
 @keyframes click-feedback {
   0% {

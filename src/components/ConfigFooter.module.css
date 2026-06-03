@@ -7,11 +7,11 @@
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.03);
-  border-radius: 100rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: var(--blue);
+  border-radius: var(--radius);
+  border: 0px solid rgba(255, 255, 255, 0.05);
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color);
 }
 
 .configItem {
@@ -21,7 +21,9 @@
   cursor: pointer;
   padding: 0.4rem 0.8rem;
   border-radius: 100rem;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
   max-width: 350px;
   overflow: hidden;
 }
@@ -55,7 +57,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: rgb(from var(--delete-button) r g b / 0.7);
+  color: var(--delete-button);
   cursor: pointer;
   padding: 0.4rem 0.8rem;
   border-radius: 100rem;

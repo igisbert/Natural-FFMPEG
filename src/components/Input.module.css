@@ -1,11 +1,10 @@
 .inputContainer {
   width: 100%;
-  background: red;
   display: flex;
   align-items: center;
-  border-radius: 10rem;
-  padding: 0.4em 0.6rem 0.6rem 1em;
-  background-color: color-mix(in srgb, var(--button-background), white 80%);
+  border-radius: var(--radius);
+  padding: 0.8rem 1.2rem;
+  background-color: var(--blue);
   gap: 1rem;
 }
 
@@ -33,6 +32,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--background-color);
-  color: var(--color);
+  background-color: var(--gold);
+  color: var(--blue);
 }

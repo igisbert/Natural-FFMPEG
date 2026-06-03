@@ -49,40 +49,6 @@ input {
   max-width: 1100px;
 } */
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.submitButton {
-  background-color: var(--button-background);
-  color: var(--color);
-  cursor: pointer;
-  border: none;
-  outline: none;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  border-radius: 100rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition:
-    padding 0.4s ease,
-    gap 0.4s ease;
-}
-
-.buttonText {
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 200px; /* Initial max-width */
-  transition: max-width 0.4s ease;
-}
 
 .icon {
   width: 1.5rem;
@@ -94,25 +60,3 @@ input {
   transition: transform 0.4s ease;
 }
 
-.submitButton.loading {
-  padding: 0.6em;
-  gap: 0;
-}
-
-.submitButton.loading .buttonText {
-  max-width: 0;
-}
-
-.submitButton.loading .geminiIcon {
-  animation: rotate 1s linear infinite;
-}
-
-.submitButton:disabled {
-  color: var(--color);
-}
-
-.geminiIcon {
-  width: 1.5rem;
-  aspect-ratio: 1;
-  transition: transform 0.4s ease;
-}

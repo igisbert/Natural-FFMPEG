@@ -49,9 +49,9 @@
 }
 
 .categoryTab {
-  background: rgb(from var(--color) r g b / 0.05);
-  color: var(--color);
-  border: 1px solid rgb(from var(--color) r g b / 0.1);
+  background: color-mix(in srgb, var(--blue), var(--gold) 60%);
+  color: var(--background-color);
+  border: 0;
   padding: 0.5rem 1.25rem;
   border-radius: 100rem;
   font-size: 0.9rem;
@@ -62,14 +62,13 @@
 }
 
 .categoryTab:not(.activeTab):hover {
-  background: rgb(from var(--color) r g b / 0.15);
-  border-color: var(--color);
+  background: color-mix(in srgb, var(--blue), transparent 40%);
+  color: var(--color);
 }
 
 .activeTab {
-  background: var(--color);
-  color: var(--background-color);
-  border-color: var(--color);
+  background: var(--blue);
+  color: var(--color);
 }
 
 .close {
@@ -118,7 +117,7 @@
 }
 
 .presetCard {
-  background: var(--button-background);
+  background: var(--blue);
   color: var(--color);
   border: 1px solid rgb(from var(--color) r g b / 0.1);
   border-radius: 0.75rem;

@@ -13,7 +13,7 @@ export default function AddAPIKey({ apiKeyName, setApiKey }) {
     const formData = new FormData(formRef.current);
     const apiKey = formData.get("apiKey");
     await setSecret(apiKeyName, apiKey);
-    setApiKey(apiKey); // Update state in parent component
+    setApiKey(apiKey);
   }
 
   const handleOpenUrl = async () => {
