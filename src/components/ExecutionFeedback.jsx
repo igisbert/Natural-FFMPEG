@@ -17,7 +17,7 @@ export default function ExecutionFeedback({ execution }) {
     );
   }
 
-  if (execution.status === "idle") {
+  if (execution.status === "idle" || execution.status === "starting") {
     return null;
   }
 

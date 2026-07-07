@@ -106,6 +106,21 @@ export default function Application({
   }, [commandInput]);
 
   useEffect(() => {
+    const MINIMUM_LOADING_TIME = 750;
+    let commandStartTime = 0;
+
+    const unlistenStarted = listen("ffmpeg-started", () => {
+      commandStartTime = Date.now();
+      setTimeout(() => {
+        setExecution((prev) => {
+          if (prev.status === "starting") {
+            return { ...prev, status: "running" };
+          }
+          return prev;
+        });
+      }, MINIMUM_LOADING_TIME);
+    });
+
     const unlistenSpeed = listen("ffmpeg-speed", (event) => {
       const [speed, elapsed, duration] = event.payload;
       const remaining = speed > 0 ? (duration / speed) - parseElapsed(elapsed) : null;
@@ -126,7 +141,12 @@ export default function Application({
     });
 
     const unlistenError = listen("ffmpeg-error", (event) => {
-      setExecution({ status: "error", speed: null, error: event.payload });
+      setExecution((prev) => {
+        if (prev.status === "starting") {
+          return { status: "error", speed: null, elapsed: null, remaining: null, error: event.payload };
+        }
+        return { ...prev, status: "error", error: event.payload };
+      });
     });
 
     const unlistenCancelled = listen("ffmpeg-cancelled", () => {
@@ -137,7 +157,8 @@ export default function Application({
     });
 
     return () => {
-      unlistenProgress.then((f) => f());
+      unlistenStarted.then((f) => f());
+      unlistenSpeed.then((f) => f());
       unlistenSuccess.then((f) => f());
       unlistenError.then((f) => f());
       unlistenCancelled.then((f) => f());
@@ -246,7 +267,7 @@ export default function Application({
   };
 
   const runCommand = async (command) => {
-    setExecution({ status: "running", speed: null, elapsed: null, remaining: null, error: null });
+    setExecution({ status: "starting", speed: null, elapsed: null, remaining: null, error: null });
     await invoke("execute_ffmpeg_command", { command });
   };
 

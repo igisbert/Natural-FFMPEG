@@ -113,7 +113,18 @@ async fn execute_ffmpeg_command(
         #[cfg(not(debug_assertions))]
         cmd.creation_flags(CREATE_NO_WINDOW);
 
-        let mut spawned_cmd = cmd.spawn().expect("Failed to spawn ffmpeg command");
+        let mut spawned_cmd = match cmd.spawn() {
+            Ok(cmd) => cmd,
+            Err(e) => {
+                app_handle
+                    .emit_to("main", "ffmpeg-error", format!("Failed to start FFmpeg: {}", e))
+                    .unwrap();
+                return;
+            }
+        };
+
+        // Notify frontend that FFmpeg started successfully
+        app_handle.emit_to("main", "ffmpeg-started", ()).unwrap();
 
         // Take stderr before storing the child process
         let stderr = spawned_cmd.stderr.take().expect("Failed to capture stderr");
