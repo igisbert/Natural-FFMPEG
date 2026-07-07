@@ -1,5 +1,5 @@
 use std::{
-    io::{Read, BufRead, BufReader},
+    io::{Read, BufReader},
     process::{Command, Stdio},
     sync::{Arc, Mutex},
     thread,
@@ -84,7 +84,24 @@ async fn execute_ffmpeg_command(
                 .unwrap();
             return;
         };
-        let _input_file = &caps[1];
+        let input_file = &caps[1];
+
+        // Get duration with ffprobe
+        let mut ffprobe_command = Command::new("ffprobe");
+        ffprobe_command.args([
+            "-v", "error",
+            "-show_entries", "format=duration",
+            "-of", "default=noprint_wrappers=1:nokey=1",
+            input_file,
+        ]);
+        #[cfg(not(debug_assertions))]
+        ffprobe_command.creation_flags(CREATE_NO_WINDOW);
+        
+        let duration: f64 = ffprobe_command.output()
+            .ok()
+            .and_then(|o| String::from_utf8(o.stdout).ok())
+            .and_then(|s| s.trim().parse().ok())
+            .unwrap_or(0.0);
 
         let mut cmd = Command::new("ffmpeg");
         cmd.args(shlex::split(&command).unwrap_or_default().iter().skip(1))
@@ -131,7 +148,7 @@ async fn execute_ffmpeg_command(
                                         .map(|c| c[1].to_string())
                                         .unwrap_or_default();
                                     app_handle
-                                        .emit_to("main", "ffmpeg-speed", (speed, elapsed))
+                                        .emit_to("main", "ffmpeg-speed", (speed, elapsed, duration))
                                         .unwrap();
                                     last_emit = now;
                                 }

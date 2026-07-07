@@ -1,6 +1,13 @@
 import style from "./ExecutionFeedback.module.css";
 import { Check, XCircle } from "lucide-preact";
 
+function formatRemaining(seconds) {
+  if (!seconds || seconds <= 0) return null;
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+}
+
 export default function ExecutionFeedback({ execution }) {
   if (execution.status === "error") {
     return (
@@ -14,6 +21,8 @@ export default function ExecutionFeedback({ execution }) {
     return null;
   }
 
+  const remaining = formatRemaining(execution.remaining);
+
   return (
     <div className={style.feedbackContainer}>
       <div className={style.panel}>
@@ -23,6 +32,7 @@ export default function ExecutionFeedback({ execution }) {
             <div className={`${style.stats} ${!execution.elapsed && execution.speed === null ? style.hidden : ""}`}>
               {execution.elapsed && <span>Tiempo: {execution.elapsed}</span>}
               {execution.speed !== null && <span>Velocidad: {execution.speed}x</span>}
+              {remaining && <span>Restante: ~{remaining}</span>}
             </div>
           </>
         )}

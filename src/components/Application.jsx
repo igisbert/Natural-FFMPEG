@@ -21,6 +21,22 @@ import ErrorMessage from "./ErrorMessage";
 import { translateGeminiError } from "../utils/geminiErrorHandler";
 import UploadButton from "./UploadButton";
 
+function parseElapsed(str) {
+  if (!str) return 0;
+  const parts = str.split(':');
+  if (parts.length === 3) {
+    return parseFloat(parts[0]) * 3600 + parseFloat(parts[1]) * 60 + parseFloat(parts[2]);
+  }
+  return 0;
+}
+
+function formatRemaining(seconds) {
+  if (!seconds || seconds <= 0) return null;
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+}
+
 export default function Application({
   apiKey,
   showPresets,
@@ -36,9 +52,10 @@ export default function Application({
   const [error, setError] = useState({ message: "", details: "" });
   const [model, setModelState] = useState(modelsList.flash.id);
   const [execution, setExecution] = useState({
-    status: "idle", // idle, running, success, error, cancelled
+    status: "idle",
     speed: null,
     elapsed: null,
+    remaining: null,
     error: null,
   });
 
@@ -63,7 +80,7 @@ export default function Application({
 
   const resetStates = () => {
     setError({ message: "", details: "" });
-    setExecution({ status: "idle", speed: null, elapsed: null, error: null });
+    setExecution({ status: "idle", speed: null, elapsed: null, remaining: null, error: null });
     setFfmpegCommand("");
   };
 
@@ -90,11 +107,13 @@ export default function Application({
 
   useEffect(() => {
     const unlistenSpeed = listen("ffmpeg-speed", (event) => {
-      const [speed, elapsed] = event.payload;
+      const [speed, elapsed, duration] = event.payload;
+      const remaining = speed > 0 ? (duration / speed) - parseElapsed(elapsed) : null;
       setExecution({
         status: "running",
         speed,
         elapsed,
+        remaining,
         error: null,
       });
     });
@@ -227,7 +246,7 @@ export default function Application({
   };
 
   const runCommand = async (command) => {
-    setExecution({ status: "running", speed: null, elapsed: null, error: null });
+    setExecution({ status: "running", speed: null, elapsed: null, remaining: null, error: null });
     await invoke("execute_ffmpeg_command", { command });
   };
 
