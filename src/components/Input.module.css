@@ -23,6 +23,11 @@
   outline: none;
 }
 
+.input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .button {
   border-radius: 50%;
   border: none;

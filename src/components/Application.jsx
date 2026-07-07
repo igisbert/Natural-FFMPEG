@@ -301,11 +301,12 @@ export default function Application({
             onInput={(event) => setCommandInput(event.target.value)}
             name={"user-prompt"}
             placeholder="¡Describe con precisión lo que quieres hacer!"
+            disabled={execution.status === "starting" || execution.status === "running"}
           />{" "}
           <ModelSelector model={model} setModel={handleSetModel} />
           <GeminiButton
             isLoading={isLoading}
-            disabled={selectedFiles.length === 0}
+            disabled={selectedFiles.length === 0 || execution.status === "starting" || execution.status === "running"}
           />
         </form>
 
