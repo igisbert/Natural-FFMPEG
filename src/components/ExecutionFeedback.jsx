@@ -8,11 +8,16 @@ function formatRemaining(seconds) {
   return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
 }
 
-export default function ExecutionFeedback({ execution }) {
+export default function ExecutionFeedback({ execution, onShowDetails }) {
   if (execution.status === "error") {
     return (
       <div className={style.feedbackContainer}>
-        <div className={style.errorContainer}>{execution.error}</div>
+        <div className={style.errorContainer}>
+          <span>{execution.error}</span>
+          <button className={style.detailsButton} onClick={onShowDetails}>
+            Ver detalles
+          </button>
+        </div>
       </div>
     );
   }

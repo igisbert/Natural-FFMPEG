@@ -1,3 +1,4 @@
+use serde::Serialize;
 use std::{
     io::{Read, BufReader},
     process::{Command, Stdio},
@@ -19,6 +20,12 @@ const CREATE_NO_WINDOW: u32 = 0x08000000;
 // Global state to store the running FFmpeg process
 struct FfmpegProcessState {
     child: Arc<Mutex<Option<std::process::Child>>>,
+}
+
+#[derive(Serialize, Clone)]
+struct FfmpegError {
+    message: String,
+    details: String,
 }
 
 
@@ -79,7 +86,10 @@ async fn execute_ffmpeg_command(
                 .emit_to(
                     "main",
                     "ffmpeg-error",
-                    "Could not find any input file in command.",
+                    FfmpegError {
+                        message: "No se encontró el archivo de entrada".to_string(),
+                        details: "El comando FFmpeg no contiene un archivo de entrada válido.".to_string(),
+                    },
                 )
                 .unwrap();
             return;
@@ -117,7 +127,10 @@ async fn execute_ffmpeg_command(
             Ok(cmd) => cmd,
             Err(e) => {
                 app_handle
-                    .emit_to("main", "ffmpeg-error", format!("Failed to start FFmpeg: {}", e))
+                    .emit_to("main", "ffmpeg-error", FfmpegError {
+                        message: "Error al iniciar FFmpeg".to_string(),
+                        details: e.to_string(),
+                    })
                     .unwrap();
                 return;
             }
@@ -138,6 +151,7 @@ async fn execute_ffmpeg_command(
         let mut reader = BufReader::new(stderr);
         let mut buffer = String::new();
         let mut last_emit = Instant::now();
+        let mut all_output: Vec<String> = Vec::new();
 
         let speed_re = regex::Regex::new(r"speed=\s*(\d+\.?\d*)x").unwrap();
         let elapsed_re = regex::Regex::new(r"elapsed=(\d+:\d{2}:\d{2}\.\d{2})").unwrap();
@@ -150,6 +164,8 @@ async fn execute_ffmpeg_command(
                     let ch = byte[0] as char;
                     if ch == '\r' || ch == '\n' {
                         if !buffer.is_empty() {
+                            all_output.push(buffer.clone());
+
                             let now = Instant::now();
                             if now.duration_since(last_emit) >= Duration::from_millis(500) {
                                 if let Some(caps) = speed_re.captures(&buffer) {
@@ -194,8 +210,16 @@ async fn execute_ffmpeg_command(
         if status.success() {
             app_handle.emit_to("main", "ffmpeg-success", ()).unwrap();
         } else {
+            let details = if all_output.is_empty() {
+                "No hay detalles disponibles.".to_string()
+            } else {
+                all_output.join("\n")
+            };
             app_handle
-                .emit_to("main", "ffmpeg-error", "FFmpeg command failed.")
+                .emit_to("main", "ffmpeg-error", FfmpegError {
+                    message: "Error al ejecutar FFmpeg".to_string(),
+                    details,
+                })
                 .unwrap();
         }
     });

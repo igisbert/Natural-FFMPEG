@@ -5,6 +5,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import CodeBlock from "./CodeBlock";
 import ExecutionFeedback from "./ExecutionFeedback";
+import ErrorDialog from "./ErrorDialog";
 import { getSecret, setSecret, SECRET_KEYS } from "../utils/store";
 
 import style from "./Application.module.css";
@@ -57,7 +58,9 @@ export default function Application({
     elapsed: null,
     remaining: null,
     error: null,
+    errorDetails: null,
   });
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const videoExtensions = [
     "mp4",
@@ -80,7 +83,8 @@ export default function Application({
 
   const resetStates = () => {
     setError({ message: "", details: "" });
-    setExecution({ status: "idle", speed: null, elapsed: null, remaining: null, error: null });
+    setExecution({ status: "idle", speed: null, elapsed: null, remaining: null, error: null, errorDetails: null });
+    setDialogOpen(false);
     setFfmpegCommand("");
   };
 
@@ -141,11 +145,12 @@ export default function Application({
     });
 
     const unlistenError = listen("ffmpeg-error", (event) => {
+      const { message, details } = event.payload;
       setExecution((prev) => {
         if (prev.status === "starting") {
-          return { status: "error", speed: null, elapsed: null, remaining: null, error: event.payload };
+          return { status: "error", speed: null, elapsed: null, remaining: null, error: message, errorDetails: details };
         }
-        return { ...prev, status: "error", error: event.payload };
+        return { ...prev, status: "error", error: message, errorDetails: details };
       });
     });
 
@@ -267,7 +272,7 @@ export default function Application({
   };
 
   const runCommand = async (command) => {
-    setExecution({ status: "starting", speed: null, elapsed: null, remaining: null, error: null });
+    setExecution({ status: "starting", speed: null, elapsed: null, remaining: null, error: null, errorDetails: null });
     await invoke("execute_ffmpeg_command", { command });
   };
 
@@ -315,11 +320,20 @@ export default function Application({
             >
               {ffmpegCommand}
             </CodeBlock>
-            <ExecutionFeedback execution={execution} />
+            <ExecutionFeedback
+              execution={execution}
+              onShowDetails={() => setDialogOpen(true)}
+            />
           </>
         )}
       </div>
       <DragOverlay isDragging={isDragging} />
+      <ErrorDialog
+        isOpen={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        message={execution.error}
+        details={execution.errorDetails}
+      />
     </>
   );
 }
