@@ -6,11 +6,11 @@ export default function ExecutionFeedback({ execution }) {
     <div className={style.feedbackContainer}>
       {execution.status === "running" && (
         <div className={style.runningContainer}>
-          <div className={style.loader}></div>
-          <span className={style.infoText}>
-            {execution.elapsed && <span>{execution.elapsed}</span>}
-            {execution.speed !== null && <span>{execution.speed}x</span>}
-          </span>
+          <div className={style.spinner}></div>
+          <div className={`${style.stats} ${!execution.elapsed && execution.speed === null ? style.hidden : ""}`}>
+            {execution.elapsed && <span>Tiempo: {execution.elapsed}</span>}
+            {execution.speed !== null && <span>Velocidad: {execution.speed}x</span>}
+          </div>
         </div>
       )}
       {execution.status === "success" && <Check className={style.checkIcon} />}
