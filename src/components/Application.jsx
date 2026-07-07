@@ -107,10 +107,18 @@ export default function Application({
       setExecution({ status: "error", progress: 0, error: event.payload });
     });
 
+    const unlistenCancelled = listen("ffmpeg-cancelled", () => {
+      setExecution({ status: "cancelled", progress: 0, error: null });
+      setTimeout(() => {
+        setExecution({ status: "idle", progress: 0, error: null });
+      }, 2000);
+    });
+
     return () => {
       unlistenProgress.then((f) => f());
       unlistenSuccess.then((f) => f());
       unlistenError.then((f) => f());
+      unlistenCancelled.then((f) => f());
     };
   }, []);
 
@@ -220,6 +228,14 @@ export default function Application({
     await invoke("execute_ffmpeg_command", { command });
   };
 
+  const cancelCommand = async () => {
+    try {
+      await invoke("cancel_ffmpeg_command");
+    } catch (e) {
+      console.error("Error cancelling command:", e);
+    }
+  };
+
   return (
     <>
       <div className={style.container}>
@@ -251,6 +267,7 @@ export default function Application({
           <>
             <CodeBlock
               onRunCommand={() => runCommand(ffmpegCommand)}
+              onCancelCommand={cancelCommand}
               isRunning={execution.status === "running"}
             >
               {ffmpegCommand}

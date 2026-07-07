@@ -23,11 +23,17 @@
 .buttonsContainer {
   display: flex;
   gap: 0.5rem;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--blue);
   padding: 0.5rem 5px;
   border-top: 1px solid var(--background-color);
   border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.rightButtons {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .codeBlockButton {
@@ -43,6 +49,20 @@
   align-items: center;
   gap: 0.5rem;
   transition: all 0.2s ease-in-out;
+}
+
+.cancelButton {
+  background-color: var(--delete-button, #e74c3c);
+  color: white;
+}
+
+.cancelButton:hover {
+  background-color: #c0392b;
+}
+
+.hidden {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* .codeBlockButton:hover {

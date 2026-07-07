@@ -1,6 +1,7 @@
 use std::{
     io::{BufRead, BufReader},
     process::{Command, Stdio},
+    sync::{Arc, Mutex},
     thread,
 };
 use tauri::Emitter;
@@ -13,6 +14,11 @@ mod gemini;
 // Define the Windows-specific creation flag
 #[cfg(not(debug_assertions))]
 const CREATE_NO_WINDOW: u32 = 0x08000000;
+
+// Global state to store the running FFmpeg process
+struct FfmpegProcessState {
+    child: Arc<Mutex<Option<std::process::Child>>>,
+}
 
 
 #[tauri::command]
@@ -38,7 +44,28 @@ fn time_to_seconds(time_str: &str) -> f64 {
 }
 
 #[tauri::command]
-async fn execute_ffmpeg_command(mut command: String, app: tauri::AppHandle) {
+async fn cancel_ffmpeg_command(
+    state: tauri::State<'_, FfmpegProcessState>,
+    app: tauri::AppHandle,
+) -> Result<(), String> {
+    let mut child_lock = state.child.lock().map_err(|e| e.to_string())?;
+    
+    if let Some(ref mut child) = *child_lock {
+        child.kill().map_err(|e| e.to_string())?;
+        *child_lock = None;
+        app.emit_to("main", "ffmpeg-cancelled", ()).unwrap();
+        Ok(())
+    } else {
+        Err("No FFmpeg process running".to_string())
+    }
+}
+
+#[tauri::command]
+async fn execute_ffmpeg_command(
+    mut command: String,
+    app: tauri::AppHandle,
+    state: tauri::State<'_, FfmpegProcessState>,
+) -> Result<(), String> {
     let app_handle = app.clone();
 
     // Reemplazar [HASH] por un ID único basado en el tiempo
@@ -50,6 +77,10 @@ async fn execute_ffmpeg_command(mut command: String, app: tauri::AppHandle) {
         let hash = format!("{:x}", timestamp); // Convertir a hexadecimal
         command = command.replace("[HASH]", &hash);
     }
+
+    let state_clone = FfmpegProcessState {
+        child: state.child.clone(),
+    };
 
     thread::spawn(move || {
         let input_file_re = regex::Regex::new(r#"-i\s+"([^"]+)""#).unwrap();
@@ -105,7 +136,15 @@ async fn execute_ffmpeg_command(mut command: String, app: tauri::AppHandle) {
 
         let mut spawned_cmd = cmd.spawn().expect("Failed to spawn ffmpeg command");
 
+        // Take stderr before storing the child process
         let stderr = spawned_cmd.stderr.take().expect("Failed to capture stderr");
+
+        // Store the child process handle for cancellation
+        {
+            let mut child_lock = state_clone.child.lock().unwrap();
+            *child_lock = Some(spawned_cmd);
+        }
+
         let reader = BufReader::new(stderr);
 
         let time_re = regex::Regex::new(r"time=(\d{2}:\d{2}:\d{2}\.\d{2})").unwrap();
@@ -125,7 +164,22 @@ async fn execute_ffmpeg_command(mut command: String, app: tauri::AppHandle) {
             }
         }
 
-        let status = spawned_cmd.wait().expect("Failed to wait for ffmpeg command");
+        // Wait for the process to finish
+        let status = {
+            let mut child_lock = state_clone.child.lock().unwrap();
+            if let Some(ref mut child) = *child_lock {
+                child.wait().expect("Failed to wait for ffmpeg command")
+            } else {
+                // Process was cancelled
+                return;
+            }
+        };
+
+        // Clear the stored child process
+        {
+            let mut child_lock = state_clone.child.lock().unwrap();
+            *child_lock = None;
+        }
 
         if status.success() {
             app_handle.emit_to("main", "ffmpeg-success", ()).unwrap();
@@ -135,6 +189,8 @@ async fn execute_ffmpeg_command(mut command: String, app: tauri::AppHandle) {
                 .unwrap();
         }
     });
+
+    Ok(())
 }
 
 #[tauri::command]
@@ -191,10 +247,14 @@ pub fn run() {
         .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_shell::init())
+        .manage(FfmpegProcessState {
+            child: Arc::new(Mutex::new(None)),
+        })
         .invoke_handler(tauri::generate_handler![
             check_ffmpeg,
             generate_command,
-            execute_ffmpeg_command
+            execute_ffmpeg_command,
+            cancel_ffmpeg_command
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
