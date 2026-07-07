@@ -98,6 +98,11 @@ pub async fn generate_ffmpeg_command(
 6.  **Flags**: Use only safe, standard ffmpeg options. **ALWAYS include the `-y` flag** right after `ffmpeg` to overwrite output files without asking.
 7.  **Command**: The result must be a single-line command, ready to run in Windows cmd.exe.
 8.  **Trimming**: Use `-ss` for the start time and `-t` for the new duration. If the duration is provided (see Rule #9), use it for calculations.{}
+9. **Filter validity**:
+   - Generate only filters and options that exist in FFmpeg.
+   - Never invent color names, filter options or parameters.
+   - `color=c=none` is invalid. Use `color=c=black@0.0,format=rgba` for transparent backgrounds.
+   - When rendering emoji or Unicode text on Windows with `drawtext`, always use `fontfile='C\:/Windows/Fonts/seguiemj.ttf'`.
 
 # EXAMPLES of mapping a user task to a final command:
 -   **User Task**: "convert my video to a gif"
