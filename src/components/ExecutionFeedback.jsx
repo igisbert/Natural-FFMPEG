@@ -5,11 +5,12 @@ export default function ExecutionFeedback({ execution }) {
   return (
     <div className={style.feedbackContainer}>
       {execution.status === "running" && (
-        <div className={style.progressBarContainer}>
-          <div
-            className={style.progressBar}
-            style={{ width: `${execution.progress}%` }}
-          ></div>
+        <div className={style.runningContainer}>
+          <div className={style.loader}></div>
+          <span className={style.infoText}>
+            {execution.elapsed && <span>{execution.elapsed}</span>}
+            {execution.speed !== null && <span>{execution.speed}x</span>}
+          </span>
         </div>
       )}
       {execution.status === "success" && <Check className={style.checkIcon} />}

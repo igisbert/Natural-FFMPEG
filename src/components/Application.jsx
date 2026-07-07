@@ -36,8 +36,9 @@ export default function Application({
   const [error, setError] = useState({ message: "", details: "" });
   const [model, setModelState] = useState(modelsList.flash.id);
   const [execution, setExecution] = useState({
-    status: "idle", // idle, running, success, error
-    progress: 0,
+    status: "idle", // idle, running, success, error, cancelled
+    speed: null,
+    elapsed: null,
     error: null,
   });
 
@@ -62,7 +63,7 @@ export default function Application({
 
   const resetStates = () => {
     setError({ message: "", details: "" });
-    setExecution({ status: "idle", progress: 0, error: null });
+    setExecution({ status: "idle", speed: null, elapsed: null, error: null });
     setFfmpegCommand("");
   };
 
@@ -88,29 +89,31 @@ export default function Application({
   }, [commandInput]);
 
   useEffect(() => {
-    const unlistenProgress = listen("ffmpeg-progress", (event) => {
+    const unlistenSpeed = listen("ffmpeg-speed", (event) => {
+      const [speed, elapsed] = event.payload;
       setExecution({
         status: "running",
-        progress: event.payload,
+        speed,
+        elapsed,
         error: null,
       });
     });
 
     const unlistenSuccess = listen("ffmpeg-success", () => {
-      setExecution({ status: "success", progress: 100, error: null });
+      setExecution({ status: "success", speed: null, error: null });
       setTimeout(() => {
-        setExecution({ status: "idle", progress: 0, error: null });
+        setExecution({ status: "idle", speed: null, error: null });
       }, 2000); // Reset after 2 seconds
     });
 
     const unlistenError = listen("ffmpeg-error", (event) => {
-      setExecution({ status: "error", progress: 0, error: event.payload });
+      setExecution({ status: "error", speed: null, error: event.payload });
     });
 
     const unlistenCancelled = listen("ffmpeg-cancelled", () => {
-      setExecution({ status: "cancelled", progress: 0, error: null });
+      setExecution({ status: "cancelled", speed: null, error: null });
       setTimeout(() => {
-        setExecution({ status: "idle", progress: 0, error: null });
+        setExecution({ status: "idle", speed: null, error: null });
       }, 2000);
     });
 
@@ -224,7 +227,7 @@ export default function Application({
   };
 
   const runCommand = async (command) => {
-    setExecution({ status: "running", progress: 0, error: null });
+    setExecution({ status: "running", speed: null, elapsed: null, error: null });
     await invoke("execute_ffmpeg_command", { command });
   };
 

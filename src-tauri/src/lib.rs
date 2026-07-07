@@ -1,8 +1,9 @@
 use std::{
-    io::{BufRead, BufReader},
+    io::{Read, BufRead, BufReader},
     process::{Command, Stdio},
     sync::{Arc, Mutex},
     thread,
+    time::{Duration, Instant},
 };
 use tauri::Emitter;
 // Add this for Windows-specific process creation flags
@@ -29,18 +30,6 @@ fn check_ffmpeg() -> bool {
     #[cfg(not(debug_assertions))]
     command.creation_flags(CREATE_NO_WINDOW);
     command.output().is_ok()
-}
-
-fn time_to_seconds(time_str: &str) -> f64 {
-    let parts: Vec<&str> = time_str.split(':').collect();
-    if parts.len() == 3 {
-        let hours = parts[0].parse::<f64>().unwrap_or(0.0);
-        let minutes = parts[1].parse::<f64>().unwrap_or(0.0);
-        let seconds = parts[2].parse::<f64>().unwrap_or(0.0);
-        hours * 3600.0 + minutes * 60.0 + seconds
-    } else {
-        0.0
-    }
 }
 
 #[tauri::command]
@@ -95,35 +84,8 @@ async fn execute_ffmpeg_command(
                 .unwrap();
             return;
         };
-        let input_file = &caps[1];
+        let _input_file = &caps[1];
 
-        let mut ffprobe_command = Command::new("ffprobe");
-        ffprobe_command.args([
-            "-v",
-            "error",
-            "-show_entries",
-            "format=duration",
-            "-of",
-            "default=noprint_wrappers=1:nokey=1",
-            input_file,
-        ]);
-        // Hide the console window on Windows
-        #[cfg(not(debug_assertions))]
-        ffprobe_command.creation_flags(CREATE_NO_WINDOW);
-        let ffprobe_output = ffprobe_command.output();
-
-        let duration_str = match ffprobe_output {
-            Ok(output) => String::from_utf8(output.stdout).unwrap_or_default(),
-            Err(e) => {
-                app_handle
-                    .emit_to("main", "ffmpeg-error", &e.to_string())
-                    .unwrap();
-                return;
-            }
-        };
-
-        let total_duration = duration_str.trim().parse::<f64>().unwrap_or(0.0);
-        
         let mut cmd = Command::new("ffmpeg");
         cmd.args(shlex::split(&command).unwrap_or_default().iter().skip(1))
             .stdin(Stdio::null())
@@ -145,22 +107,42 @@ async fn execute_ffmpeg_command(
             *child_lock = Some(spawned_cmd);
         }
 
-        let reader = BufReader::new(stderr);
+        let mut reader = BufReader::new(stderr);
+        let mut buffer = String::new();
+        let mut last_emit = Instant::now();
 
-        let time_re = regex::Regex::new(r"time=(\d{2}:\d{2}:\d{2}\.\d{2})").unwrap();
+        let speed_re = regex::Regex::new(r"speed=\s*(\d+\.?\d*)x").unwrap();
+        let elapsed_re = regex::Regex::new(r"elapsed=(\d+:\d{2}:\d{2}\.\d{2})").unwrap();
 
-        for line in reader.lines() {
-            if let Ok(line_str) = line {
-                if total_duration > 0.0 {
-                    if let Some(caps) = time_re.captures(&line_str) {
-                        let time_val = &caps[1];
-                        let current_seconds = time_to_seconds(time_val);
-                        let progress = (current_seconds / total_duration * 100.0).min(100.0);
-                        app_handle
-                            .emit_to("main", "ffmpeg-progress", progress)
-                            .unwrap();
+        loop {
+            let mut byte = [0u8; 1];
+            match reader.read(&mut byte) {
+                Ok(0) => break, // EOF
+                Ok(_) => {
+                    let ch = byte[0] as char;
+                    if ch == '\r' || ch == '\n' {
+                        if !buffer.is_empty() {
+                            let now = Instant::now();
+                            if now.duration_since(last_emit) >= Duration::from_millis(500) {
+                                if let Some(caps) = speed_re.captures(&buffer) {
+                                    let speed = caps[1].parse::<f64>().unwrap_or(0.0);
+                                    let elapsed = elapsed_re
+                                        .captures(&buffer)
+                                        .map(|c| c[1].to_string())
+                                        .unwrap_or_default();
+                                    app_handle
+                                        .emit_to("main", "ffmpeg-speed", (speed, elapsed))
+                                        .unwrap();
+                                    last_emit = now;
+                                }
+                            }
+                            buffer.clear();
+                        }
+                    } else {
+                        buffer.push(ch);
                     }
                 }
+                Err(_) => break,
             }
         }
 
