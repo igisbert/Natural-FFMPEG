@@ -1,6 +1,6 @@
 use serde::Serialize;
 use std::{
-    io::{Read, BufReader},
+    io::{BufReader, Read},
     process::{Command, Stdio},
     sync::{Arc, Mutex},
     thread,
@@ -28,7 +28,6 @@ struct FfmpegError {
     details: String,
 }
 
-
 #[tauri::command]
 fn check_ffmpeg() -> bool {
     let mut command = Command::new("ffmpeg");
@@ -45,7 +44,7 @@ async fn cancel_ffmpeg_command(
     app: tauri::AppHandle,
 ) -> Result<(), String> {
     let mut child_lock = state.child.lock().map_err(|e| e.to_string())?;
-    
+
     if let Some(ref mut child) = *child_lock {
         child.kill().map_err(|e| e.to_string())?;
         *child_lock = None;
@@ -88,7 +87,8 @@ async fn execute_ffmpeg_command(
                     "ffmpeg-error",
                     FfmpegError {
                         message: "No se encontró el archivo de entrada".to_string(),
-                        details: "El comando FFmpeg no contiene un archivo de entrada válido.".to_string(),
+                        details: "El comando FFmpeg no contiene un archivo de entrada válido."
+                            .to_string(),
                     },
                 )
                 .unwrap();
@@ -99,15 +99,19 @@ async fn execute_ffmpeg_command(
         // Get duration with ffprobe
         let mut ffprobe_command = Command::new("ffprobe");
         ffprobe_command.args([
-            "-v", "error",
-            "-show_entries", "format=duration",
-            "-of", "default=noprint_wrappers=1:nokey=1",
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
             input_file,
         ]);
         #[cfg(not(debug_assertions))]
         ffprobe_command.creation_flags(CREATE_NO_WINDOW);
-        
-        let duration: f64 = ffprobe_command.output()
+
+        let duration: f64 = ffprobe_command
+            .output()
             .ok()
             .and_then(|o| String::from_utf8(o.stdout).ok())
             .and_then(|s| s.trim().parse().ok())
@@ -118,7 +122,7 @@ async fn execute_ffmpeg_command(
             .stdin(Stdio::null())
             .stdout(Stdio::piped())
             .stderr(Stdio::piped());
-        
+
         // Hide the console window on Windows
         #[cfg(not(debug_assertions))]
         cmd.creation_flags(CREATE_NO_WINDOW);
@@ -127,10 +131,14 @@ async fn execute_ffmpeg_command(
             Ok(cmd) => cmd,
             Err(e) => {
                 app_handle
-                    .emit_to("main", "ffmpeg-error", FfmpegError {
-                        message: "Error al iniciar FFmpeg".to_string(),
-                        details: e.to_string(),
-                    })
+                    .emit_to(
+                        "main",
+                        "ffmpeg-error",
+                        FfmpegError {
+                            message: "Error al iniciar FFmpeg".to_string(),
+                            details: e.to_string(),
+                        },
+                    )
                     .unwrap();
                 return;
             }
@@ -216,10 +224,14 @@ async fn execute_ffmpeg_command(
                 all_output.join("\n")
             };
             app_handle
-                .emit_to("main", "ffmpeg-error", FfmpegError {
-                    message: "Error al ejecutar FFmpeg".to_string(),
-                    details,
-                })
+                .emit_to(
+                    "main",
+                    "ffmpeg-error",
+                    FfmpegError {
+                        message: "Error al ejecutar FFmpeg".to_string(),
+                        details,
+                    },
+                )
                 .unwrap();
         }
     });
@@ -264,18 +276,20 @@ async fn generate_command(
                     .parse::<f64>()
                     .ok()
             } else {
-                None 
+                None
             }
         }
         Err(_) => None,
     };
 
-    gemini::generate_ffmpeg_command(prompt, api_key, input_paths, output_folder, model, duration).await
+    gemini::generate_ffmpeg_command(prompt, api_key, input_paths, output_folder, model, duration)
+        .await
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_store::Builder::default().build())

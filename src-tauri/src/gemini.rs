@@ -111,7 +111,13 @@ pub async fn generate_ffmpeg_command(
 Generate the ffmpeg command for the following request:
 -   **User Task**: "{}"
 "#,
-        input_files_list, output_folder, duration_rule, output_folder, output_folder, output_folder, prompt
+        input_files_list,
+        output_folder,
+        duration_rule,
+        output_folder,
+        output_folder,
+        output_folder,
+        prompt
     );
 
     let request_body = GeminiRequest {
@@ -135,12 +141,7 @@ Generate the ffmpeg command for the following request:
             .await
             .map_err(|e| e.to_string())?;
         if let Some(candidate) = gemini_response.candidates.get(0) {
-            if let Some(part) = candidate
-                .content
-                .parts
-                .iter()
-                .find(|p| !p.thought)
-            {
+            if let Some(part) = candidate.content.parts.iter().find(|p| !p.thought) {
                 let command = clean_gemini_response(&part.text);
                 return Ok(command);
             }

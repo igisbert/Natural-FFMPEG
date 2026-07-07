@@ -69,3 +69,22 @@
   background-color: rgb(from var(--delete-button) r g b / 0.1);
   color: var(--delete-button);
 }
+
+.toggleButton {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color);
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: 100rem;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.toggleButton:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+}

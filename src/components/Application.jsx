@@ -1,4 +1,5 @@
 import { open } from "@tauri-apps/plugin-dialog";
+import { sendNotification } from "@tauri-apps/plugin-notification";
 import { useRef, useState, useEffect } from "preact/hooks";
 import { allowDragAndDrop } from "../utils/allowDragAndDrop";
 import { invoke } from "@tauri-apps/api/core";
@@ -29,6 +30,13 @@ function parseElapsed(str) {
     return parseFloat(parts[0]) * 3600 + parseFloat(parts[1]) * 60 + parseFloat(parts[2]);
   }
   return 0;
+}
+
+async function notify(title, body) {
+  const enabled = await getSecret(SECRET_KEYS.NOTIFICATIONS_ENABLED);
+  if (enabled !== false) {
+    sendNotification({ title, body });
+  }
 }
 
 export default function Application({
@@ -130,9 +138,10 @@ export default function Application({
 
     const unlistenSuccess = listen("ffmpeg-success", () => {
       setExecution({ status: "success", speed: null, error: null });
+      notify("Natural FFmpeg", "Vídeo procesado con éxito");
       setTimeout(() => {
         setExecution({ status: "idle", speed: null, error: null });
-      }, 2000); // Reset after 2 seconds
+      }, 2000);
     });
 
     const unlistenError = listen("ffmpeg-error", (event) => {
@@ -141,6 +150,7 @@ export default function Application({
         if (prev.status === "starting") {
           return { status: "error", speed: null, elapsed: null, remaining: null, error: message, errorDetails: details };
         }
+        notify("Natural FFmpeg", message);
         return { ...prev, status: "error", error: message, errorDetails: details };
       });
     });

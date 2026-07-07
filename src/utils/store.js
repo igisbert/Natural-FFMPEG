@@ -51,4 +51,5 @@ export const SECRET_KEYS = {
   GEMINI_API_KEY: "gemini_api_key",
   GEMINI_MODEL: "gemini_model",
   OUTPUT_FOLDER: "output_folder",
+  NOTIFICATIONS_ENABLED: "notifications_enabled",
 };

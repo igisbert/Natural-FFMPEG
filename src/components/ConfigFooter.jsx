@@ -1,12 +1,13 @@
 import { useState, useEffect } from "preact/hooks";
 import { open } from "@tauri-apps/plugin-dialog";
 import { desktopDir } from "@tauri-apps/api/path";
-import { Folder, Key, Trash2 } from "lucide-preact";
+import { Folder, Key, Trash2, Bell, BellOff } from "lucide-preact";
 import { getSecret, setSecret, removeSecret, SECRET_KEYS } from "../utils/store";
 import style from "./ConfigFooter.module.css";
 
 export default function ConfigFooter({ apiKey, setApiKey }) {
   const [outputFolder, setOutputFolder] = useState("");
+  const [notifications, setNotifications] = useState(true);
 
   useEffect(() => {
     async function initFolder() {
@@ -20,6 +21,14 @@ export default function ConfigFooter({ apiKey, setApiKey }) {
       }
     }
     initFolder();
+  }, []);
+
+  useEffect(() => {
+    async function initNotifications() {
+      const saved = await getSecret(SECRET_KEYS.NOTIFICATIONS_ENABLED);
+      setNotifications(saved !== false);
+    }
+    initNotifications();
   }, []);
 
   const handleSelectFolder = async () => {
@@ -43,6 +52,12 @@ export default function ConfigFooter({ apiKey, setApiKey }) {
     setApiKey(null);
   };
 
+  const toggleNotifications = async () => {
+    const newValue = !notifications;
+    setNotifications(newValue);
+    await setSecret(SECRET_KEYS.NOTIFICATIONS_ENABLED, newValue);
+  };
+
   return (
     <footer className={style.footer}>
       <div className={style.configItem} onClick={handleSelectFolder} title={outputFolder}>
@@ -50,6 +65,13 @@ export default function ConfigFooter({ apiKey, setApiKey }) {
         <span className={style.label}>Destino:</span>
         <span className={style.value}>{outputFolder}</span>
       </div>
+
+      <div className={style.divider} />
+
+      <button className={style.toggleButton} onClick={toggleNotifications}>
+        {notifications ? <Bell size={16} /> : <BellOff size={16} />}
+        <span>Notificaciones</span>
+      </button>
 
       <div className={style.divider} />
 
