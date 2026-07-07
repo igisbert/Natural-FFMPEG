@@ -26,7 +26,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--blue);
-  padding: 0.5rem 5px;
+  padding: 0.5rem 1rem;
   border-top: 1px solid var(--background-color);
   border-radius: 0 0 0.5rem 0.5rem;
 }
