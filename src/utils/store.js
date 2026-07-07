@@ -52,4 +52,6 @@ export const SECRET_KEYS = {
   GEMINI_MODEL: "gemini_model",
   OUTPUT_FOLDER: "output_folder",
   NOTIFICATIONS_ENABLED: "notifications_enabled",
+  COMMAND_HISTORY_RECENT: "command_history_recent",
+  COMMAND_HISTORY_SAVED: "command_history_saved",
 };

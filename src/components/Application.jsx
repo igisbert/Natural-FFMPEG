@@ -7,13 +7,14 @@ import { listen } from "@tauri-apps/api/event";
 import CodeBlock from "./CodeBlock";
 import ExecutionFeedback from "./ExecutionFeedback";
 import ErrorDialog from "./ErrorDialog";
+import CommandHistory from "./CommandHistory";
 import { getSecret, setSecret, SECRET_KEYS } from "../utils/store";
 
 import style from "./Application.module.css";
 
 import Input from "./Input";
 import Button from "./Button";
-import { Code, Upload } from "lucide-preact";
+import { Code, Upload, History } from "lucide-preact";
 import GeminiButton from "./GeminiButton";
 import ModelSelector from "./ModelSelector";
 import modelsList from "../utils/modelsList";
@@ -39,6 +40,20 @@ async function notify(title, body) {
   }
 }
 
+async function saveToHistory(prompt, command, files) {
+  const recent = await getSecret(SECRET_KEYS.COMMAND_HISTORY_RECENT) || [];
+  const item = {
+    id: Date.now().toString(),
+    prompt,
+    command,
+    inputFiles: files.map((f) => f.path),
+    fileTypes: files.map((f) => f.type),
+    timestamp: Date.now(),
+  };
+  const updated = [item, ...recent.filter((r) => r.prompt !== prompt)].slice(0, 20);
+  await setSecret(SECRET_KEYS.COMMAND_HISTORY_RECENT, updated);
+}
+
 export default function Application({
   apiKey,
   showPresets,
@@ -62,6 +77,9 @@ export default function Application({
     errorDetails: null,
   });
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [referencePrompt, setReferencePrompt] = useState("");
+  const lastCommandRef = useRef({ prompt: "", command: "", files: [] });
 
   const videoExtensions = [
     "mp4",
@@ -136,7 +154,11 @@ export default function Application({
       });
     });
 
-    const unlistenSuccess = listen("ffmpeg-success", () => {
+    const unlistenSuccess = listen("ffmpeg-success", async () => {
+      const { prompt, command, files } = lastCommandRef.current;
+      if (prompt && command && files.length > 0) {
+        await saveToHistory(prompt, command, files);
+      }
       setExecution({ status: "success", speed: null, error: null });
       notify("Natural FFmpeg", "Vídeo procesado con éxito");
       setTimeout(() => {
@@ -264,6 +286,7 @@ export default function Application({
       });
 
       setFfmpegCommand(command);
+      lastCommandRef.current = { prompt: userPrompt, command, files: selectedFiles };
     } catch (e) {
       const friendlyMessage = translateGeminiError(e);
       setError({ message: friendlyMessage, details: e });
@@ -273,6 +296,7 @@ export default function Application({
   };
 
   const runCommand = async (command) => {
+    setFfmpegCommand(command);
     setExecution({ status: "starting", speed: null, elapsed: null, remaining: null, error: null, errorDetails: null });
     await invoke("execute_ffmpeg_command", { command });
   };
@@ -285,9 +309,31 @@ export default function Application({
     }
   };
 
+  const handleReimagine = (item) => {
+    let cleanPrompt = item.prompt;
+    if (cleanPrompt.startsWith("[Reimaginar] ")) {
+      cleanPrompt = cleanPrompt.replace("[Reimaginar] ", "");
+      const commandMatch = cleanPrompt.match(/ \| Comando anterior:.*$/s);
+      if (commandMatch) {
+        cleanPrompt = cleanPrompt.replace(commandMatch[0], "");
+      }
+    }
+    const prompt = `[Reimaginar] ${cleanPrompt} | Comando anterior: ${item.command}`;
+    setCommandInput(prompt);
+    setReferencePrompt(prompt);
+  };
+
   return (
     <>
       <div className={style.container}>
+        <button
+          className={style.historyButton}
+          onClick={() => setHistoryOpen(true)}
+        >
+          <History size={18} />
+          Historial
+        </button>
+
         <UploadButton handleFileSelect={handleFileSelect} />
 
         <FileList files={selectedFiles} onRemove={removeFile} />
@@ -335,6 +381,12 @@ export default function Application({
         onClose={() => setDialogOpen(false)}
         message={execution.error}
         details={execution.errorDetails}
+      />
+      <CommandHistory
+        isOpen={historyOpen}
+        onClose={() => setHistoryOpen(false)}
+        onReimagine={handleReimagine}
+        onExecute={runCommand}
       />
     </>
   );

@@ -1,0 +1,141 @@
+.container {
+  padding: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius);
+  margin-top: 0.5rem;
+}
+
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.slot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.slotHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.slotLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.originalName {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+.selectButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.selectButton:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.selected {
+  background-color: rgba(135, 255, 131, 0.1);
+  border: 1px solid rgba(135, 255, 131, 0.3);
+  border-style: solid;
+  color: var(--ffmpeg-green);
+  justify-content: flex-start;
+}
+
+.selected:hover {
+  background-color: rgba(135, 255, 131, 0.15);
+}
+
+.selectedName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.cancelButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cancelButton:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.executeButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--ffmpeg-green);
+  color: var(--blue);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.executeButton:hover {
+  opacity: 0.9;
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  opacity: 0.4;
+}
