@@ -230,7 +230,9 @@ export default function Application({
         <form action="" ref={form} class={style.form} onSubmit={handleSubmit}>
           <Input
             showPresetsButton
-            onPresetsClick={() => setShowPresets((currentValue) => !currentValue)}
+            onPresetsClick={() =>
+              setShowPresets((currentValue) => !currentValue)
+            }
             value={commandInput}
             onInput={(event) => setCommandInput(event.target.value)}
             name={"user-prompt"}
@@ -246,7 +248,7 @@ export default function Application({
         <ErrorMessage message={error.message} />
 
         {ffmpegCommand && (
-          <div className={style.resultContainer} style={{ opacity: 1 }}>
+          <>
             <CodeBlock
               onRunCommand={() => runCommand(ffmpegCommand)}
               isRunning={execution.status === "running"}
@@ -254,7 +256,7 @@ export default function Application({
               {ffmpegCommand}
             </CodeBlock>
             <ExecutionFeedback execution={execution} />
-          </div>
+          </>
         )}
       </div>
       <DragOverlay isDragging={isDragging} />

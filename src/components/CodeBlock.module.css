@@ -1,3 +1,7 @@
+.codeBlockContainer {
+  margin-top: 2rem;
+}
+
 .codeBlock {
   background-color: var(--blue);
   color: var(--color);

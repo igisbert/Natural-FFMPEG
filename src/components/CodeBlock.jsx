@@ -18,7 +18,7 @@ export default function CodeBlock({ children, onRunCommand, isRunning }) {
   };
 
   return (
-    <>
+    <div className={style.codeBlockContainer}>
       <div className={style.codeBlock}>
         <h3 className={style.codeBlockTitle}>Comando generado:</h3>
         {children}
@@ -49,6 +49,6 @@ export default function CodeBlock({ children, onRunCommand, isRunning }) {
           <Play size={24}></Play> Ejecutar
         </button>
       </footer>
-    </>
+    </div>
   );
 }

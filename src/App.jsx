@@ -47,9 +47,11 @@ function App() {
 
   return (
     <main class="container">
-      {ffmpegInstalled === null && <Loader />}
-      {!ffmpegInstalled && <InstallFFmpeg />}
-      {apiKey ? (
+      {ffmpegInstalled === null ? (
+        <Loader />
+      ) : !ffmpegInstalled ? (
+        <InstallFFmpeg />
+      ) : apiKey ? (
         <Application
           apiKey={apiKey}
           showPresets={showPresets}
@@ -61,7 +63,9 @@ function App() {
         <AddAPIKey apiKeyName={apiKeyName} setApiKey={setApiKey} />
       )}
 
-      {apiKey && <ConfigFooter apiKey={apiKey} setApiKey={setApiKey} />}
+      {ffmpegInstalled && apiKey && (
+        <ConfigFooter apiKey={apiKey} setApiKey={setApiKey} />
+      )}
       <Presets
         showPresets={showPresets}
         setShowPresets={setShowPresets}

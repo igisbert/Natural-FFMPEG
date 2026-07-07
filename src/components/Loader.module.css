@@ -11,7 +11,8 @@
   aspect-ratio: 1;
   display: grid;
   border-radius: 50%;
-  background: linear-gradient(
+  background:
+    linear-gradient(
         0deg,
         rgb(from var(--loader-color) r g b / 50%) 30%,
         #0000 0 70%,
