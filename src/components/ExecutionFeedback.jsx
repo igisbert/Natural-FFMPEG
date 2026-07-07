@@ -34,7 +34,7 @@ export default function ExecutionFeedback({ execution, onShowDetails }) {
         {execution.status === "running" && (
           <>
             <div className={style.spinner}></div>
-            <div className={`${style.stats} ${!execution.elapsed && execution.speed === null ? style.hidden : ""}`}>
+            <div className={`${style.stats} ${(execution.elapsed || execution.speed !== null) ? "" : style.hidden}`}>
               {execution.elapsed && <span>Tiempo: {execution.elapsed}</span>}
               {execution.speed !== null && <span>Velocidad: {execution.speed}x</span>}
               {remaining && <span>Restante: ~{remaining}</span>}

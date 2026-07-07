@@ -36,6 +36,7 @@ export default function CodeBlock({ children, onRunCommand, onCancelCommand, isR
           onAnimationEnd={() =>
             setIsAnimating((prev) => ({ ...prev, cancel: false }))
           }
+          disabled={!isRunning}
         >
           <XCircle size={24}></XCircle> Cancelar
         </button>

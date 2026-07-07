@@ -15,6 +15,12 @@ export default function ErrorDialog({ isOpen, onClose, message, details }) {
     } else if (!isOpen && dialog.open) {
       dialog.close();
     }
+
+    return () => {
+      if (dialog.open) {
+        dialog.close();
+      }
+    };
   }, [isOpen]);
 
   const handleCopy = async () => {

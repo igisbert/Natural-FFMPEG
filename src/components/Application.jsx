@@ -31,13 +31,6 @@ function parseElapsed(str) {
   return 0;
 }
 
-function formatRemaining(seconds) {
-  if (!seconds || seconds <= 0) return null;
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
-}
-
 export default function Application({
   apiKey,
   showPresets,
@@ -111,10 +104,8 @@ export default function Application({
 
   useEffect(() => {
     const MINIMUM_LOADING_TIME = 750;
-    let commandStartTime = 0;
 
     const unlistenStarted = listen("ffmpeg-started", () => {
-      commandStartTime = Date.now();
       setTimeout(() => {
         setExecution((prev) => {
           if (prev.status === "starting") {
