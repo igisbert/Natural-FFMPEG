@@ -3,10 +3,10 @@
   max-width: 800px;
   margin-top: 1rem;
   position: relative;
-  height: 3.5rem;
+  height: 5.5rem;
 }
 
-.runningContainer {
+.panel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,6 +16,7 @@
   margin: 0 auto;
   height: 5.5rem;
   background-color: var(--blue);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.5rem;
   padding: 0rem;
 }
@@ -35,6 +36,16 @@
   }
 }
 
+.icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--ffmpeg-green);
+}
+
+.icon.cancelled {
+  color: var(--delete-button, #e74c3c);
+}
+
 .stats {
   display: flex;
   gap: 0.75rem;
@@ -48,33 +59,12 @@
 }
 
 .errorContainer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  width: 24rem;
+  margin: 0 auto;
   background-color: var(--delete-button);
   color: white;
-  padding: 0.5rem;
+  padding: 0.75rem;
   text-align: center;
   border-radius: 0.5rem;
-}
-
-.checkIcon {
-  color: var(--ffmpeg-green);
-  width: 2rem;
-  height: 2rem;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.cancelledIcon {
-  color: var(--delete-button, #e74c3c);
-  width: 2rem;
-  height: 2rem;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  font-size: 0.85rem;
 }
