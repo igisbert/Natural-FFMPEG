@@ -17,8 +17,8 @@ import Button from "./Button";
 import { Code, Upload, History } from "lucide-preact";
 import GeminiButton from "./GeminiButton";
 import ModelSelector from "./ModelSelector";
-import modelsList from "../utils/modelsList";
 import DragOverlay from "./DragOverlay";
+import modelsJson from "../../listModels.json";
 import FileList from "./FileList";
 import ErrorMessage from "./ErrorMessage";
 import { translateGeminiError } from "../utils/geminiErrorHandler";
@@ -67,7 +67,10 @@ export default function Application({
   const [isLoading, setIsLoading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState({ message: "", details: "" });
-  const [model, setModelState] = useState(modelsList.flash.id);
+  const defaultModel = Object.entries(modelsJson)
+    .filter(([key]) => key !== "embedding")
+    .map(([, value]) => value.id)[0];
+  const [model, setModelState] = useState(defaultModel);
   const [execution, setExecution] = useState({
     status: "idle",
     speed: null,

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import styles from "./ModelSelector.module.css";
-import fallbackModels from "../utils/modelsList";
+import fallbackModels from "../../listModels.json";
 
 export default function ModelSelector({ model, setModel }) {
   const [models, setModels] = useState(fallbackModels);

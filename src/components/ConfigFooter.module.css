@@ -99,17 +99,6 @@
   color: white;
 }
 
-.infoIcon {
-  color: rgba(255, 255, 255, 0.4);
-  cursor: help;
-  display: flex;
-  align-items: center;
-  margin-left: -0.5rem;
-  padding: 0.25rem;
-  border-radius: 50%;
-  transition: all 0.2s;
-}
-
 .infoIcon:hover {
   color: white;
   background-color: rgba(255, 255, 255, 0.1);
