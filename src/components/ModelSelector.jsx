@@ -29,21 +29,23 @@ export default function ModelSelector({ model, setModel }) {
 
   return (
     <div className={styles.tabs}>
-      {Object.entries(models).flatMap(([key, value]) => [
-        <input
-          key={`input-${key}`}
-          checked={model === value.id}
-          value={value.id}
-          name="model"
-          id={key}
-          type="radio"
-          className={styles.input}
-          onChange={handleModelChange}
-        />,
-        <label key={`label-${key}`} htmlFor={key} className={styles.label}>
-          {value.name}
-        </label>
-      ])}
+      {Object.entries(models)
+        .filter(([key]) => key !== "embedding")
+        .flatMap(([key, value]) => [
+          <input
+            key={`input-${key}`}
+            checked={model === value.id}
+            value={value.id}
+            name="model"
+            id={key}
+            type="radio"
+            className={styles.input}
+            onChange={handleModelChange}
+          />,
+          <label key={`label-${key}`} htmlFor={key} className={styles.label}>
+            {value.name}
+          </label>,
+        ])}
     </div>
   );
 }

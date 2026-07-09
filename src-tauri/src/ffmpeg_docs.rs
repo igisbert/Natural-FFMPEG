@@ -15,6 +15,26 @@ pub struct EmbeddingEntry {
 }
 
 static EMBEDDINGS_CACHE: OnceLock<Vec<EmbeddingEntry>> = OnceLock::new();
+static EMBEDDING_MODEL: OnceLock<String> = OnceLock::new();
+
+async fn get_embedding_model() -> Result<&'static String, String> {
+    if let Some(model) = EMBEDDING_MODEL.get() {
+        return Ok(model);
+    }
+
+    let url = "https://raw.githubusercontent.com/igisbert/Natural-FFMPEG/refs/heads/master/listModels.json";
+    let client = reqwest::Client::new();
+    let response = client.get(url).send().await.map_err(|e| e.to_string())?;
+    let models: serde_json::Value = response.json().await.map_err(|e| e.to_string())?;
+
+    let model_id = models["embedding"]["id"]
+        .as_str()
+        .ok_or_else(|| "No embedding model found in listModels.json".to_string())?
+        .to_string();
+
+    let _ = EMBEDDING_MODEL.set(model_id);
+    Ok(EMBEDDING_MODEL.get().unwrap())
+}
 
 fn load_embeddings() -> &'static Vec<EmbeddingEntry> {
     EMBEDDINGS_CACHE.get_or_init(|| {
@@ -48,13 +68,14 @@ fn cosine_similarity(a: &[f32], b: &[f32]) -> f32 {
 
 pub async fn get_embedding(text: &str, api_key: &str) -> Result<Vec<f32>, String> {
     let client = reqwest::Client::new();
+    let model = get_embedding_model().await?;
     let url = format!(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:embedContent?key={}",
-        api_key
+        "https://generativelanguage.googleapis.com/v1beta/models/{}:embedContent?key={}",
+        model, api_key
     );
 
     let body = serde_json::json!({
-        "model": "models/gemini-embedding-2",
+        "model": format!("models/{}", model),
         "content": {
             "parts": [{ "text": text }]
         }

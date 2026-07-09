@@ -24,9 +24,17 @@ if (!API_KEY) {
 
 const DOCS_DIR = join(import.meta.dirname, "./src-tauri/src/docs");
 const OUTPUT_FILE = join(DOCS_DIR, "embeddings-cache.json");
-const EMBEDDING_MODEL = "gemini-embedding-2";
-const BATCH_SIZE = 25; // Reducido para evitar rate limits
-const DELAY_BETWEEN_BATCHES = 3500; // 3.5 segundos entre batches (100 req/min = 1.67 req/s)
+const MODELS_FILE = join(import.meta.dirname, "./listModels.json");
+const BATCH_SIZE = 25;
+const DELAY_BETWEEN_BATCHES = 3500;
+
+const modelsData = JSON.parse(readFileSync(MODELS_FILE, "utf-8"));
+const EMBEDDING_MODEL = modelsData.embedding?.id;
+if (!EMBEDDING_MODEL) {
+  console.error("Error: No se encontró modelo 'embedding' en listModels.json");
+  process.exit(1);
+}
+console.log(`Usando modelo: ${EMBEDDING_MODEL}`);
 
 async function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));

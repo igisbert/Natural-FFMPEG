@@ -3,12 +3,20 @@
     "id": "gemma-4-31b-it",
     "name": "Gemma 4"
   },
-  "flash": {
+  "flashold": {
     "id": "gemini-3.1-flash-lite",
     "name": "Gemini 3.1"
+  },
+  "flash": {
+    "id": "gemini-3.5-flash",
+    "name": "Gemini 3.5"
   },
   "pro": {
     "id": "gemini-3.1-pro-preview",
     "name": "Gemini 3.1 Pro"
+  },
+  "embedding": {
+    "id": "gemini-embedding-2",
+    "name": "Embedding"
   }
 }
