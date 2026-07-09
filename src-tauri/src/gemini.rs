@@ -53,6 +53,7 @@ pub async fn generate_ffmpeg_command(
     output_folder: String,
     model: String,
     duration: Option<f64>,
+    relevant_docs: String,
 ) -> Result<String, String> {
     let mut headers = header::HeaderMap::new();
     headers.insert(
@@ -85,6 +86,12 @@ pub async fn generate_ffmpeg_command(
         "".to_string()
     };
 
+    let docs_section = if !relevant_docs.is_empty() {
+        format!("\n\n# RELEVANT FFmpeg FILTER DOCUMENTATION:\nUse these filters and options if they match the user's request:\n\n{}", relevant_docs)
+    } else {
+        "".to_string()
+    };
+
     let system_prompt = format!(
         r#"You are an ffmpeg expert. Your task is to generate a single, valid ffmpeg command based on the user's request.
 
@@ -102,8 +109,7 @@ pub async fn generate_ffmpeg_command(
    - Generate only filters and options that exist in FFmpeg.
    - Never invent color names, filter options or parameters.
    - `color=c=none` is invalid. Use `color=c=black@0.0,format=rgba` for transparent backgrounds.
-   - When rendering emoji or Unicode text on Windows with `drawtext`, always use `fontfile='C\:/Windows/Fonts/seguiemj.ttf'`.
-
+   - When rendering emoji or Unicode text on Windows with `drawtext`, always use `fontfile='C\:/Windows/Fonts/seguiemj.ttf'`.{}
 # EXAMPLES of mapping a user task to a final command:
 -   **User Task**: "convert my video to a gif"
     **Command**: ffmpeg -y -i "C:\path\to\video.mp4" -vf "fps=10,scale=480:-1:flags=lanczos" "{}\output_[HASH].gif"
@@ -119,6 +125,7 @@ Generate the ffmpeg command for the following request:
         input_files_list,
         output_folder,
         duration_rule,
+        docs_section,
         output_folder,
         output_folder,
         output_folder,

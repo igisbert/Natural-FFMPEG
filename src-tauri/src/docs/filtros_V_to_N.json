@@ -1,0 +1,30 @@
+[
+  {
+    "id": "extractplanes",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Extract planes as grayscale frames.",
+    "io": "V->N",
+    "texto": "Filtro: extractplanes Descripción: Extract planes as grayscale frames. Filter extractplanes Extract planes as grayscale frames. Inputs: #0: default (video) Outputs: dynamic (depending on the options) extractplanes AVOptions: planes <flags> ..FV....... set planes (default r) y ..FV....... set luma plane u ..FV....... set u plane v ..FV....... set v plane r ..FV....... set red plane g ..FV....... set green plane b ..FV....... set blue plane a ..FV....... set alpha plane Exiting with exit code 0"
+  },
+  {
+    "id": "segment",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Segment video stream.",
+    "io": "V->N",
+    "texto": "Filtro: segment Descripción: Segment video stream. Filter segment Segment video stream. Inputs: #0: default (video) Outputs: dynamic (depending on the options) segment AVOptions: timestamps <string> ..FV....... timestamps of input at which to split input frames <string> ..FV....... frames at which to split input Exiting with exit code 0"
+  },
+  {
+    "id": "select",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Select video frames to pass in output.",
+    "io": "V->N",
+    "texto": "Filtro: select Descripción: Select video frames to pass in output. Filter select Select video frames to pass in output. Inputs: #0: default (video) Outputs: dynamic (depending on the options) select AVOptions: expr <string> ..FV....... set an expression to use for selecting frames (default \"1\") e <string> ..FV....... set an expression to use for selecting frames (default \"1\") outputs <int> ..FV....... set the number of outputs (from 1 to INT_MAX) (default 1) n <int> ..FV....... set the number of outputs (from 1 to INT_MAX) (default 1) Exiting with exit code 0"
+  },
+  {
+    "id": "split",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Pass on the input to N video outputs.",
+    "io": "V->N",
+    "texto": "Filtro: split Descripción: Pass on the input to N video outputs. Filter split Pass on the input to N video outputs. Inputs: #0: default (video) Outputs: dynamic (depending on the options) (a)split AVOptions: outputs <int> ..FVA...... set number of outputs (from 1 to INT_MAX) (default 2) Exiting with exit code 0"
+  }
+]

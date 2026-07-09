@@ -1,0 +1,58 @@
+[
+  {
+    "id": "colormap",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply custom Color Maps to video stream.",
+    "io": "VVV->V",
+    "texto": "Filtro: colormap Descripción: Apply custom Color Maps to video stream. Filter colormap Apply custom Color Maps to video stream. slice threading supported Inputs: #0: default (video) #1: source (video) #2: target (video) Outputs: #0: default (video) colormap AVOptions: patch_size <image_size> ..FV.....T. set patch size (default \"64x64\") nb_patches <int> ..FV.....T. set number of patches (from 0 to 64) (default 0) type <int> ..FV.....T. set the target type used (from 0 to 1) (default absolute) relative 0 ..FV.....T. the target colors are relative absolute 1 ..FV.....T. the target colors are absolute kernel <int> ..FV.....T. set the kernel used for measuring color difference (from 0 to 1) (default euclidean) euclidean 0 ..FV.....T. square root of sum of squared differences weuclidean 1 ..FV.....T. weighted square root of sum of squared differences This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "displace",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Displace pixels.",
+    "io": "VVV->V",
+    "texto": "Filtro: displace Descripción: Displace pixels. Filter displace Displace pixels. slice threading supported Inputs: #0: source (video) #1: xmap (video) #2: ymap (video) Outputs: #0: default (video) displace AVOptions: edge <int> ..FV.....T. set edge mode (from 0 to 3) (default smear) blank 0 ..FV.....T. smear 1 ..FV.....T. wrap 2 ..FV.....T. mirror 3 ..FV.....T. This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "maskedclamp",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Clamp first stream with second stream and third stream.",
+    "io": "VVV->V",
+    "texto": "Filtro: maskedclamp Descripción: Clamp first stream with second stream and third stream. Filter maskedclamp Clamp first stream with second stream and third stream. slice threading supported Inputs: #0: base (video) #1: dark (video) #2: bright (video) Outputs: #0: default (video) maskedclamp AVOptions: undershoot <int> ..FV.....T. set undershoot (from 0 to 65535) (default 0) overshoot <int> ..FV.....T. set overshoot (from 0 to 65535) (default 0) planes <int> ..FV.....T. set planes (from 0 to 15) (default 15) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "maskedmax",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply filtering with maximum difference of two streams.",
+    "io": "VVV->V",
+    "texto": "Filtro: maskedmax Descripción: Apply filtering with maximum difference of two streams. Filter maskedmax Apply filtering with maximum difference of two streams. slice threading supported Inputs: #0: source (video) #1: filter1 (video) #2: filter2 (video) Outputs: #0: default (video) masked(min|max) AVOptions: planes <int> ..FV.....T. set planes (from 0 to 15) (default 15) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "maskedmerge",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Merge first stream with second stream using third stream as mask.",
+    "io": "VVV->V",
+    "texto": "Filtro: maskedmerge Descripción: Merge first stream with second stream using third stream as mask. Filter maskedmerge Merge first stream with second stream using third stream as mask. slice threading supported Inputs: #0: base (video) #1: overlay (video) #2: mask (video) Outputs: #0: default (video) maskedmerge AVOptions: planes <int> ..FV.....T. set planes (from 0 to 15) (default 15) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "maskedmin",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply filtering with minimum difference of two streams.",
+    "io": "VVV->V",
+    "texto": "Filtro: maskedmin Descripción: Apply filtering with minimum difference of two streams. Filter maskedmin Apply filtering with minimum difference of two streams. slice threading supported Inputs: #0: source (video) #1: filter1 (video) #2: filter2 (video) Outputs: #0: default (video) masked(min|max) AVOptions: planes <int> ..FV.....T. set planes (from 0 to 15) (default 15) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "remap",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Remap pixels.",
+    "io": "VVV->V",
+    "texto": "Filtro: remap Descripción: Remap pixels. Filter remap Remap pixels. slice threading supported Inputs: #0: source (video) #1: xmap (video) #2: ymap (video) Outputs: #0: default (video) remap AVOptions: format <int> ..FV....... set output format (from 0 to 1) (default color) color 0 ..FV....... gray 1 ..FV....... fill <color> ..FV....... set the color of the unmapped pixels (default \"black\") Exiting with exit code 0"
+  },
+  {
+    "id": "remap_opencl",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Remap pixels using OpenCL.",
+    "io": "VVV->V",
+    "texto": "Filtro: remap_opencl Descripción: Remap pixels using OpenCL. Filter remap_opencl Remap pixels using OpenCL. Inputs: #0: source (video) #1: xmap (video) #2: ymap (video) Outputs: #0: default (video) remap_opencl AVOptions: interp <int> ..FV....... set interpolation method (from 0 to 1) (default linear) near 0 ..FV....... linear 1 ..FV....... fill <color> ..FV....... set the color of the unmapped pixels (default \"black\") Exiting with exit code 0"
+  }
+]

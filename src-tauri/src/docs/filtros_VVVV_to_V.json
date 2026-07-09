@@ -1,0 +1,9 @@
+[
+  {
+    "id": "threshold",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Threshold first video stream using other video streams.",
+    "io": "VVVV->V",
+    "texto": "Filtro: threshold Descripción: Threshold first video stream using other video streams. Filter threshold Threshold first video stream using other video streams. slice threading supported Inputs: #0: default (video) #1: threshold (video) #2: min (video) #3: max (video) Outputs: #0: default (video) threshold AVOptions: planes <int> ..FV.....T. set planes to filter (from 0 to 15) (default 15) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  }
+]

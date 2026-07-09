@@ -276,6 +276,8 @@ export default function Application({
 
     try {
       let outputFolder = await getSecret(SECRET_KEYS.OUTPUT_FOLDER);
+      const docsEnabled = await getSecret(SECRET_KEYS.FFMPEG_DOCS_ENABLED);
+      const useDocs = docsEnabled !== false;
 
       const command = await invoke("generate_command", {
         inputPaths: selectedFiles.map((f) => f.path),
@@ -283,6 +285,7 @@ export default function Application({
         prompt: userPrompt,
         apiKey: apiKey,
         model: model,
+        useDocs: useDocs,
       });
 
       setFfmpegCommand(command);

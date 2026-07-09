@@ -1,0 +1,163 @@
+[
+  {
+    "id": "bm3d",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Block-Matching 3D denoiser.",
+    "io": "N->V",
+    "texto": "Filtro: bm3d Descripción: Block-Matching 3D denoiser. Filter bm3d Block-Matching 3D denoiser. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) bm3d AVOptions: sigma <float> ..FV....... set denoising strength (from 0 to 99999.9) (default 1) block <int> ..FV....... set size of local patch (from 8 to 64) (default 16) bstep <int> ..FV....... set sliding step for processing blocks (from 1 to 64) (default 4) group <int> ..FV....... set maximal number of similar blocks (from 1 to 256) (default 1) range <int> ..FV....... set block matching range (from 1 to INT_MAX) (default 9) mstep <int> ..FV....... set step for block matching (from 1 to 64) (default 1) thmse <float> ..FV....... set threshold of mean square error for block matching (from 0 to INT_MAX) (default 0) hdthr <float> ..FV....... set hard threshold for 3D transfer domain (from 0 to INT_MAX) (default 2.7) estim <int> ..FV....... set filtering estimation mode (from 0 to 1) (default basic) basic 0 ..FV....... basic estimate final 1 ..FV....... final estimate ref <boolean> ..FV....... have reference stream (default false) planes <int> ..FV....... set planes to filter (from 0 to 15) (default 7) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "decimate",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Decimate frames (post field matching filter).",
+    "io": "N->V",
+    "texto": "Filtro: decimate Descripción: Decimate frames (post field matching filter). Filter decimate Decimate frames (post field matching filter). Inputs: dynamic (depending on the options) Outputs: #0: default (video) decimate AVOptions: cycle <int> ..FV....... set the number of frame from which one will be dropped (from 2 to 25) (default 5) dupthresh <double> ..FV....... set duplicate threshold (from 0 to 100) (default 1.1) scthresh <double> ..FV....... set scene change threshold (from 0 to 100) (default 15) blockx <int> ..FV....... set the size of the x-axis blocks used during metric calculations (from 4 to 512) (default 32) blocky <int> ..FV....... set the size of the y-axis blocks used during metric calculations (from 4 to 512) (default 32) ppsrc <boolean> ..FV....... mark main input as a pre-processed input and activate clean source input stream (default false) chroma <boolean> ..FV....... set whether or not chroma is considered in the metric calculations (default true) mixed <boolean> ..FV....... set whether or not the input only partially contains content to be decimated (default false) Exiting with exit code 0"
+  },
+  {
+    "id": "fieldmatch",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Field matching for inverse telecine.",
+    "io": "N->V",
+    "texto": "Filtro: fieldmatch Descripción: Field matching for inverse telecine. Filter fieldmatch Field matching for inverse telecine. Inputs: dynamic (depending on the options) Outputs: #0: default (video) fieldmatch AVOptions: order <int> ..FV....... specify the assumed field order (from -1 to 1) (default auto) auto -1 ..FV....... auto detect parity bff 0 ..FV....... assume bottom field first tff 1 ..FV....... assume top field first mode <int> ..FV....... set the matching mode or strategy to use (from 0 to 5) (default pc_n) pc 0 ..FV....... 2-way match (p/c) pc_n 1 ..FV....... 2-way match + 3rd match on combed (p/c + u) pc_u 2 ..FV....... 2-way match + 3rd match (same order) on combed (p/c + u) pc_n_ub 3 ..FV....... 2-way match + 3rd match on combed + 4th/5th matches if still combed (p/c + u + u/b) pcn 4 ..FV....... 3-way match (p/c/n) pcn_ub 5 ..FV....... 3-way match + 4th/5th matches on combed (p/c/n + u/b) ppsrc <boolean> ..FV....... mark main input as a pre-processed input and activate clean source input stream (default false) field <int> ..FV....... set the field to match from (from -1 to 1) (default auto) auto -1 ..FV....... automatic (same value as 'order') bottom 0 ..FV....... bottom field top 1 ..FV....... top field mchroma <boolean> ..FV....... set whether or not chroma is included during the match comparisons (default true) y0 <int> ..FV....... define an exclusion band which excludes the lines between y0 and y1 from the field matching decision (from 0 to INT_MAX) (default 0) y1 <int> ..FV....... define an exclusion band which excludes the lines between y0 and y1 from the field matching decision (from 0 to INT_MAX) (default 0) scthresh <double> ..FV....... set scene change detection threshold (from 0 to 100) (default 12) combmatch <int> ..FV....... set combmatching mode (from 0 to 2) (default sc) none 0 ..FV....... disable combmatching sc 1 ..FV....... enable combmatching only on scene change full 2 ..FV....... enable combmatching all the time combdbg <int> ..FV....... enable comb debug (from 0 to 2) (default none) none 0 ..FV....... no forced calculation pcn 1 ..FV....... calculate p/c/n pcnub 2 ..FV....... calculate p/c/n/u/b cthresh <int> ..FV....... set the area combing threshold used for combed frame detection (from -1 to 255) (default 9) chroma <boolean> ..FV....... set whether or not chroma is considered in the combed frame decision (default false) blockx <int> ..FV....... set the x-axis size of the window used during combed frame detection (from 4 to 512) (default 16) blocky <int> ..FV....... set the y-axis size of the window used during combed frame detection (from 4 to 512) (default 16) combpel <int> ..FV....... set the number of combed pixels inside any of the blocky by blockx size blocks on the frame for the frame to be detected as combed (from 0 to INT_MAX) (default 80) Exiting with exit code 0"
+  },
+  {
+    "id": "guided",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply Guided filter.",
+    "io": "N->V",
+    "texto": "Filtro: guided Descripción: Apply Guided filter. Filter guided Apply Guided filter. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) guided AVOptions: radius <int> ..FV.....T. set the box radius (from 1 to 20) (default 3) eps <float> ..FV.....T. set the regularization parameter (with square) (from 0 to 1) (default 0.01) mode <int> ..FV.....T. set filtering mode (0: basic mode; 1: fast mode) (from 0 to 1) (default basic) basic 0 ..FV.....T. basic guided filter fast 1 ..FV.....T. fast guided filter sub <int> ..FV.....T. subsampling ratio for fast mode (from 2 to 64) (default 4) guidance <int> ..FV....... set guidance mode (0: off mode; 1: on mode) (from 0 to 1) (default off) off 0 ..FV....... only one input is enabled on 1 ..FV....... two inputs are required planes <int> ..FV.....T. set planes to filter (from 0 to 15) (default 1) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "hstack",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Stack video inputs horizontally.",
+    "io": "N->V",
+    "texto": "Filtro: hstack Descripción: Stack video inputs horizontally. Filter hstack Stack video inputs horizontally. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) (h|v)stack AVOptions: inputs <int> ..FV....... set number of inputs (from 2 to INT_MAX) (default 2) shortest <boolean> ..FV....... force termination when the shortest input terminates (default false) Exiting with exit code 0"
+  },
+  {
+    "id": "interleave",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Temporally interleave video inputs.",
+    "io": "N->V",
+    "texto": "Filtro: interleave Descripción: Temporally interleave video inputs. Filter interleave Temporally interleave video inputs. Inputs: dynamic (depending on the options) Outputs: #0: default (video) interleave AVOptions: nb_inputs <int> ..FV....... set number of inputs (from 1 to INT_MAX) (default 2) n <int> ..FV....... set number of inputs (from 1 to INT_MAX) (default 2) duration <int> ..FV....... how to determine the end-of-stream (from 0 to 2) (default longest) longest 0 ..FV....... Duration of longest input shortest 1 ..FV....... Duration of shortest input first 2 ..FV....... Duration of first input Exiting with exit code 0"
+  },
+  {
+    "id": "libplacebo",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply various GPU filters from libplacebo",
+    "io": "N->V",
+    "texto": "Filtro: libplacebo Descripción: Apply various GPU filters from libplacebo Filter libplacebo Apply various GPU filters from libplacebo Inputs: dynamic (depending on the options) Outputs: #0: default (video) libplacebo AVOptions: inputs <int> ..FV....... Number of inputs (from 1 to INT_MAX) (default 1) w <string> ..FV....... Output video frame width (default \"iw\") h <string> ..FV....... Output video frame height (default \"ih\") fps <string> ..FV....... Output video frame rate (default \"none\") crop_x <string> ..FV.....T. Input video crop x (default \"(iw-cw)/2\") crop_y <string> ..FV.....T. Input video crop y (default \"(ih-ch)/2\") crop_w <string> ..FV.....T. Input video crop w (default \"iw\") crop_h <string> ..FV.....T. Input video crop h (default \"ih\") pos_x <string> ..FV.....T. Output video placement x (default \"(ow-pw)/2\") pos_y <string> ..FV.....T. Output video placement y (default \"(oh-ph)/2\") pos_w <string> ..FV.....T. Output video placement w (default \"ow\") pos_h <string> ..FV.....T. Output video placement h (default \"oh\") format <string> ..FV....... Output video format force_original_aspect_ratio <int> ..FV....... decrease or increase w/h if necessary to keep the original AR (from 0 to 2) (default disable) disable 0 ..FV....... decrease 1 ..FV....... increase 2 ..FV....... force_divisible_by <int> ..FV....... enforce that the output resolution is divisible by a defined integer when force_original_aspect_ratio is used (from 1 to 256) (default 1) reset_sar <boolean> ..FV....... force SAR normalization to 1:1 by adjusting pos_x/y/w/h (default false) normalize_sar <boolean> ..FV....... like reset_sar, but pad/crop instead of stretching the video (default false) pad_crop_ratio <float> ..FV.....T. ratio between padding and cropping when normalizing SAR (0=pad, 1=crop) (from 0 to 1) (default 0) fillcolor <color> ..FV.....T. Background fill color (default \"black@0\") corner_rounding <float> ..FV.....T. Corner rounding radius (from 0 to 1) (default 0) lut <string> ..FV....... Path to custom LUT file to apply lut_type <int> ..FV....... Application mode of the custom LUT (from 0 to 3) (default auto) auto 0 ..FV....... native 1 ..FV....... normalized 2 ..FV....... conversion 3 ..FV....... extra_opts <dictionary> ..FV.....T. Pass extra libplacebo-specific options using a :-separated list of key=value pairs shader_cache <string> ..FV....... Set shader cache path colorspace <int> ..FV.....T. select colorspace (from -1 to 17) (default auto) auto -1 ..FV....... keep the same colorspace gbr 0 ..FV....... bt709 1 ..FV....... unknown 2 ..FV....... bt470bg 5 ..FV....... smpte170m 6 ..FV....... smpte240m 7 ..FV....... ycgco 8 ..FV....... bt2020nc 9 ..FV....... bt2020c 10 ..FV....... ictcp 14 ..FV....... range <int> ..FV.....T. select color range (from -1 to 2) (default auto) auto -1 ..FV....... keep the same color range unspecified 0 ..FV....... unknown 0 ..FV....... limited 1 ..FV....... tv 1 ..FV....... mpeg 1 ..FV....... full 2 ..FV....... pc 2 ..FV....... jpeg 2 ..FV....... color_primaries <int> ..FV.....T. select color primaries (from -1 to 22) (default auto) auto -1 ..FV....... keep the same color primaries bt709 1 ..FV....... unknown 2 ..FV....... bt470m 4 ..FV....... bt470bg 5 ..FV....... smpte170m 6 ..FV....... smpte240m 7 ..FV....... film 8 ..FV....... bt2020 9 ..FV....... smpte428 10 ..FV....... smpte431 11 ..FV....... smpte432 12 ..FV....... jedec-p22 22 ..FV....... ebu3213 22 ..FV....... color_trc <int> ..FV.....T. select color transfer (from -1 to 18) (default auto) auto -1 ..FV....... keep the same color transfer bt709 1 ..FV....... unknown 2 ..FV....... bt470m 4 ..FV....... bt470bg 5 ..FV....... smpte170m 6 ..FV....... smpte240m 7 ..FV....... linear 8 ..FV....... iec61966-2-4 11 ..FV....... bt1361e 12 ..FV....... iec61966-2-1 13 ..FV....... bt2020-10 14 ..FV....... bt2020-12 15 ..FV....... smpte2084 16 ..FV....... arib-std-b67 18 ..FV....... rotate <int> ..FV.....T. rotate the input clockwise (from 0 to 4) (default 0) 0 0 ..FV....... 90 1 ..FV....... 180 2 ..FV....... 270 3 ..FV....... 360 4 ..FV....... upscaler <string> ..FV.....T. Upscaler function (default \"spline36\") downscaler <string> ..FV.....T. Downscaler function (default \"mitchell\") frame_mixer <string> ..FV.....T. Frame mixing function (default \"none\") antiringing <float> ..FV.....T. Antiringing strength (for non-EWA filters) (from 0 to 1) (default 0) sigmoid <boolean> ..FV.....T. Enable sigmoid upscaling (default true) apply_filmgrain <boolean> ..FV.....T. Apply film grain metadata (default true) apply_dolbyvision <boolean> ..FV.....T. Apply Dolby Vision metadata (default true) deinterlace <int> ..FV.....T. Deinterlacing mode (from 0 to 2) (default weave) weave 0 ..FV....... Weave fields together (no-op) bob 1 ..FV....... Naive bob deinterlacing yadif 2 ..FV....... Yet another deinterlacing filter skip_spatial_check <boolean> ..FV.....T. Skip yadif spatial check (default false) send_fields <boolean> ..FV.....T. Output a frame for each field (default false) deband <boolean> ..FV.....T. Enable debanding (default false) deband_iterations <int> ..FV.....T. Deband iterations (from 0 to 16) (default 1) deband_threshold <float> ..FV.....T. Deband threshold (from 0 to 1024) (default 4) deband_radius <float> ..FV.....T. Deband radius (from 0 to 1024) (default 16) deband_grain <float> ..FV.....T. Deband grain (from 0 to 1024) (default 6) brightness <float> ..FV.....T. Brightness boost (from -1 to 1) (default 0) contrast <float> ..FV.....T. Contrast gain (from 0 to 16) (default 1) saturation <float> ..FV.....T. Saturation gain (from 0 to 16) (default 1) hue <float> ..FV.....T. Hue shift (from -3.14159 to 3.14159) (default 0) gamma <float> ..FV.....T. Gamma adjustment (from 0 to 16) (default 1) peak_detect <boolean> ..FV.....T. Enable dynamic peak detection for HDR tone-mapping (default true) smoothing_period <float> ..FV.....T. Peak detection smoothing period (from 0 to 1000) (default 100) scene_threshold_low <float> ..FV.....T. Scene change low threshold (from -1 to 100) (default 5.5) scene_threshold_high <float> ..FV.....T. Scene change high threshold (from -1 to 100) (default 10) percentile <float> ..FV.....T. Peak detection percentile (from 0 to 100) (default 99.995) gamut_mode <int> ..FV.....T. Gamut-mapping mode (from 0 to 8) (default perceptual) clip 0 ..FV....... Hard-clip (RGB per-channel) perceptual 1 ..FV....... Colorimetric soft clipping relative 2 ..FV....... Relative colorimetric clipping saturation 3 ..FV....... Saturation mapping (RGB -> RGB) absolute 4 ..FV....... Absolute colorimetric clipping desaturate 5 ..FV....... Colorimetrically desaturate colors towards white darken 6 ..FV....... Colorimetric clip with bias towards darkening image to fit gamut warn 7 ..FV....... Highlight out-of-gamut colors linear 8 ..FV....... Linearly reduce chromaticity to fit gamut tonemapping <int> ..FV.....T. Tone-mapping algorithm (from 0 to 11) (default auto) auto 0 ..FV....... Automatic selection clip 1 ..FV....... No tone mapping (clip st2094-40 2 ..FV....... SMPTE ST 2094-40 st2094-10 3 ..FV....... SMPTE ST 2094-10 bt.2390 4 ..FV....... ITU-R BT.2390 EETF bt.2446a 5 ..FV....... ITU-R BT.2446 Method A spline 6 ..FV....... Single-pivot polynomial spline reinhard 7 ..FV....... Reinhard mobius 8 ..FV....... Mobius hable 9 ..FV....... Filmic tone-mapping (Hable) gamma 10 ..FV....... Gamma function with knee linear 11 ..FV....... Perceptually linear stretch tonemapping_param <float> ..FV.....T. Tunable parameter for some tone-mapping functions (from 0 to 100) (default 0) inverse_tonemapping <boolean> ..FV.....T. Inverse tone mapping (range expansion) (default false) tonemapping_lut_size <int> ..FV.....T. Tone-mapping LUT size (from 2 to 1024) (default 256) contrast_recovery <float> ..FV.....T. HDR contrast recovery strength (from 0 to 3) (default 0.3) contrast_smoothness <float> ..FV.....T. HDR contrast recovery smoothness (from 1 to 32) (default 3.5) dithering <int> ..FV.....T. Dither method to use (from -1 to 3) (default blue) none -1 ..FV....... Disable dithering blue 0 ..FV....... Blue noise ordered 1 ..FV....... Ordered LUT ordered_fixed 2 ..FV....... Fixed function ordered white 3 ..FV....... White noise dither_lut_size <int> ..FV....... Dithering LUT size (from 1 to 8) (default 6) dither_temporal <boolean> ..FV.....T. Enable temporal dithering (default false) cones <flags> ..FV.....T. Colorblindness adaptation model (default 0) l ..FV....... L cone m ..FV....... M cone s ..FV....... S cone cone-strength <float> ..FV.....T. Colorblindness adaptation strength (from 0 to 10) (default 0) custom_shader_path <string> ..FV....... Path to custom user shader (mpv .hook format) custom_shader_bin <binary> ..FV....... Custom user shader as binary (mpv .hook format) skip_aa <boolean> ..FV.....T. Skip anti-aliasing (default false) disable_linear <boolean> ..FV.....T. Disable linear scaling (default false) disable_builtin <boolean> ..FV.....T. Disable built-in scalers (default false) force_dither <boolean> ..FV.....T. Force dithering (default false) disable_fbos <boolean> ..FV.....T. Force-disable FBOs (default false) Exiting with exit code 0"
+  },
+  {
+    "id": "limitdiff",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply filtering with limiting difference.",
+    "io": "N->V",
+    "texto": "Filtro: limitdiff Descripción: Apply filtering with limiting difference. Filter limitdiff Apply filtering with limiting difference. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) limitdiff AVOptions: threshold <float> ..FV.....T. set the threshold (from 0 to 1) (default 0.00392157) elasticity <float> ..FV.....T. set the elasticity (from 0 to 10) (default 2) reference <boolean> ..FV....... enable reference stream (default false) planes <int> ..FV.....T. set the planes to filter (from 0 to 15) (default 15) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "mergeplanes",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Merge planes.",
+    "io": "N->V",
+    "texto": "Filtro: mergeplanes Descripción: Merge planes. Filter mergeplanes Merge planes. Inputs: dynamic (depending on the options) Outputs: #0: default (video) mergeplanes AVOptions: mapping <int> ..FV......P set input to output plane mapping (from -1 to 8.58993e+08) (default -1) format <pix_fmt> ..FV....... set output pixel format (default yuva444p) map0s <int> ..FV....... set 1st input to output stream mapping (from 0 to 3) (default 0) map0p <int> ..FV....... set 1st input to output plane mapping (from 0 to 3) (default 0) map1s <int> ..FV....... set 2nd input to output stream mapping (from 0 to 3) (default 0) map1p <int> ..FV....... set 2nd input to output plane mapping (from 0 to 3) (default 0) map2s <int> ..FV....... set 3rd input to output stream mapping (from 0 to 3) (default 0) map2p <int> ..FV....... set 3rd input to output plane mapping (from 0 to 3) (default 0) map3s <int> ..FV....... set 4th input to output stream mapping (from 0 to 3) (default 0) map3p <int> ..FV....... set 4th input to output plane mapping (from 0 to 3) (default 0) Exiting with exit code 0"
+  },
+  {
+    "id": "mix",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Mix video inputs.",
+    "io": "N->V",
+    "texto": "Filtro: mix Descripción: Mix video inputs. Filter mix Mix video inputs. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) mix AVOptions: inputs <int> ..FV....... set number of inputs (from 2 to 32767) (default 2) weights <string> ..FV.....T. set weight for each input (default \"1 1\") scale <float> ..FV.....T. set scale (from 0 to 32767) (default 0) planes <flags> ..FV.....T. set what planes to filter (default F) duration <int> ..FV....... how to determine end of stream (from 0 to 2) (default longest) longest 0 ..FV....... Duration of longest input shortest 1 ..FV....... Duration of shortest input first 2 ..FV....... Duration of first input This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "premultiply",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "PreMultiply first stream with first plane of second stream.",
+    "io": "N->V",
+    "texto": "Filtro: premultiply Descripción: PreMultiply first stream with first plane of second stream. Filter premultiply PreMultiply first stream with first plane of second stream. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) (un)premultiply AVOptions: planes <int> ..FV....... set planes (from 0 to 15) (default 15) inplace <boolean> ..FV....... enable inplace mode (default false) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "program_opencl",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Filter video using an OpenCL program",
+    "io": "N->V",
+    "texto": "Filtro: program_opencl Descripción: Filter video using an OpenCL program Filter program_opencl Filter video using an OpenCL program Inputs: dynamic (depending on the options) Outputs: #0: default (video) program_opencl AVOptions: source <string> ..FV....... OpenCL program source file kernel <string> ..FV....... Kernel name in program inputs <int> ..FV....... Number of inputs (from 1 to INT_MAX) (default 1) size <image_size> ..FV....... Video size s <image_size> ..FV....... Video size framesync AVOptions: eof_action <int> ..FV....... Action to take when encountering EOF from secondary input (from 0 to 2) (default repeat) repeat 0 ..FV....... Repeat the previous frame. endall 1 ..FV....... End both streams. pass 2 ..FV....... Pass through the main input. shortest <boolean> ..FV....... force termination when the shortest input terminates (default false) repeatlast <boolean> ..FV....... extend last frame of secondary streams beyond EOF (default true) ts_sync_mode <int> ..FV....... How strictly to sync streams based on secondary input timestamps (from 0 to 1) (default default) default 0 ..FV....... Frame from secondary input with the nearest lower or equal timestamp to the primary input frame nearest 1 ..FV....... Frame from secondary input with the absolute nearest timestamp to the primary input frame Exiting with exit code 0"
+  },
+  {
+    "id": "signature",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Calculate the MPEG-7 video signature",
+    "io": "N->V",
+    "texto": "Filtro: signature Descripción: Calculate the MPEG-7 video signature Filter signature Calculate the MPEG-7 video signature Inputs: dynamic (depending on the options) Outputs: #0: default (video) signature AVOptions: detectmode <int> ..FV....... set the detectmode (from 0 to 2) (default off) off 0 ..FV....... full 1 ..FV....... fast 2 ..FV....... nb_inputs <int> ..FV....... number of inputs (from 1 to INT_MAX) (default 1) filename <string> ..FV....... filename for output files (default \"\") format <int> ..FV....... set output format (from 0 to 1) (default binary) binary 0 ..FV....... xml 1 ..FV....... th_d <int> ..FV....... threshold to detect one word as similar (from 1 to INT_MAX) (default 9000) th_dc <int> ..FV....... threshold to detect all words as similar (from 1 to INT_MAX) (default 60000) th_xh <int> ..FV....... threshold to detect frames as similar (from 1 to INT_MAX) (default 116) th_di <int> ..FV....... minimum length of matching sequence in frames (from 0 to INT_MAX) (default 0) th_it <double> ..FV....... threshold for relation of good to all frames (from 0 to 1) (default 0.5) Exiting with exit code 0"
+  },
+  {
+    "id": "unpremultiply",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "UnPreMultiply first stream with first plane of second stream.",
+    "io": "N->V",
+    "texto": "Filtro: unpremultiply Descripción: UnPreMultiply first stream with first plane of second stream. Filter unpremultiply UnPreMultiply first stream with first plane of second stream. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) (un)premultiply AVOptions: planes <int> ..FV....... set planes (from 0 to 15) (default 15) inplace <boolean> ..FV....... enable inplace mode (default false) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "vstack",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Stack video inputs vertically.",
+    "io": "N->V",
+    "texto": "Filtro: vstack Descripción: Stack video inputs vertically. Filter vstack Stack video inputs vertically. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) (h|v)stack AVOptions: inputs <int> ..FV....... set number of inputs (from 2 to INT_MAX) (default 2) shortest <boolean> ..FV....... force termination when the shortest input terminates (default false) Exiting with exit code 0"
+  },
+  {
+    "id": "xmedian",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Pick median pixels from several video inputs.",
+    "io": "N->V",
+    "texto": "Filtro: xmedian Descripción: Pick median pixels from several video inputs. Filter xmedian Pick median pixels from several video inputs. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) xmedian AVOptions: inputs <int> ..FV....... set number of inputs (from 3 to 255) (default 3) planes <int> ..FV.....T. set planes to filter (from 0 to 15) (default 15) percentile <float> ..FV.....T. set percentile (from 0 to 1) (default 0.5) framesync AVOptions: eof_action <int> ..FV....... Action to take when encountering EOF from secondary input (from 0 to 2) (default repeat) repeat 0 ..FV....... Repeat the previous frame. endall 1 ..FV....... End both streams. pass 2 ..FV....... Pass through the main input. shortest <boolean> ..FV....... force termination when the shortest input terminates (default false) repeatlast <boolean> ..FV....... extend last frame of secondary streams beyond EOF (default true) ts_sync_mode <int> ..FV....... How strictly to sync streams based on secondary input timestamps (from 0 to 1) (default default) default 0 ..FV....... Frame from secondary input with the nearest lower or equal timestamp to the primary input frame nearest 1 ..FV....... Frame from secondary input with the absolute nearest timestamp to the primary input frame This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "xstack",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Stack video inputs into custom layout.",
+    "io": "N->V",
+    "texto": "Filtro: xstack Descripción: Stack video inputs into custom layout. Filter xstack Stack video inputs into custom layout. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (video) xstack AVOptions: inputs <int> ..FV....... set number of inputs (from 2 to INT_MAX) (default 2) layout <string> ..FV....... set custom layout grid <image_size> ..FV....... set fixed size grid layout shortest <boolean> ..FV....... force termination when the shortest input terminates (default false) fill <string> ..FV....... set the color for unused pixels (default \"none\") Exiting with exit code 0"
+  },
+  {
+    "id": "hstack_vaapi",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "\"VA-API\" hstack",
+    "io": "N->V",
+    "texto": "Filtro: hstack_vaapi Descripción: \"VA-API\" hstack Filter hstack_vaapi \"VA-API\" hstack Inputs: dynamic (depending on the options) Outputs: #0: default (video) hstack_vaapi AVOptions: inputs <int> ..FV....... Set number of inputs (from 2 to 65535) (default 2) shortest <boolean> ..FV....... Force termination when the shortest input terminates (default false) height <int> ..FV....... Set output height (0 to use the height of input 0) (from 0 to 65535) (default 0) Exiting with exit code 0"
+  },
+  {
+    "id": "vstack_vaapi",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "\"VA-API\" vstack",
+    "io": "N->V",
+    "texto": "Filtro: vstack_vaapi Descripción: \"VA-API\" vstack Filter vstack_vaapi \"VA-API\" vstack Inputs: dynamic (depending on the options) Outputs: #0: default (video) vstack_vaapi AVOptions: inputs <int> ..FV....... Set number of inputs (from 2 to 65535) (default 2) shortest <boolean> ..FV....... Force termination when the shortest input terminates (default false) width <int> ..FV....... Set output width (0 to use the width of input 0) (from 0 to 65535) (default 0) Exiting with exit code 0"
+  },
+  {
+    "id": "xstack_vaapi",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "\"VA-API\" xstack",
+    "io": "N->V",
+    "texto": "Filtro: xstack_vaapi Descripción: \"VA-API\" xstack Filter xstack_vaapi \"VA-API\" xstack Inputs: dynamic (depending on the options) Outputs: #0: default (video) xstack_vaapi AVOptions: inputs <int> ..FV....... Set number of inputs (from 2 to 65535) (default 2) shortest <boolean> ..FV....... Force termination when the shortest input terminates (default false) layout <string> ..FV....... Set custom layout grid <image_size> ..FV....... set fixed size grid layout grid_tile_size <image_size> ..FV....... set tile size in grid layout fill <string> ..FV....... Set the color for unused pixels (default \"none\") Exiting with exit code 0"
+  },
+  {
+    "id": "hstack_qsv",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "\"Quick Sync Video\" hstack",
+    "io": "N->V",
+    "texto": "Filtro: hstack_qsv Descripción: \"Quick Sync Video\" hstack Filter hstack_qsv \"Quick Sync Video\" hstack Inputs: dynamic (depending on the options) Outputs: #0: default (video) hstack_qsv AVOptions: inputs <int> ..FV....... Set number of inputs (from 2 to 65535) (default 2) shortest <boolean> ..FV....... Force termination when the shortest input terminates (default false) height <int> ..FV....... Set output height (0 to use the height of input 0) (from 0 to 65535) (default 0) Exiting with exit code 0"
+  },
+  {
+    "id": "vstack_qsv",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "\"Quick Sync Video\" vstack",
+    "io": "N->V",
+    "texto": "Filtro: vstack_qsv Descripción: \"Quick Sync Video\" vstack Filter vstack_qsv \"Quick Sync Video\" vstack Inputs: dynamic (depending on the options) Outputs: #0: default (video) vstack_qsv AVOptions: inputs <int> ..FV....... Set number of inputs (from 2 to 65535) (default 2) shortest <boolean> ..FV....... Force termination when the shortest input terminates (default false) width <int> ..FV....... Set output width (0 to use the width of input 0) (from 0 to 65535) (default 0) Exiting with exit code 0"
+  },
+  {
+    "id": "xstack_qsv",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "\"Quick Sync Video\" xstack",
+    "io": "N->V",
+    "texto": "Filtro: xstack_qsv Descripción: \"Quick Sync Video\" xstack Filter xstack_qsv \"Quick Sync Video\" xstack Inputs: dynamic (depending on the options) Outputs: #0: default (video) xstack_qsv AVOptions: inputs <int> ..FV....... Set number of inputs (from 2 to 65535) (default 2) shortest <boolean> ..FV....... Force termination when the shortest input terminates (default false) layout <string> ..FV....... Set custom layout grid <image_size> ..FV....... set fixed size grid layout grid_tile_size <image_size> ..FV....... set tile size in grid layout fill <string> ..FV....... Set the color for unused pixels (default \"none\") Exiting with exit code 0"
+  }
+]

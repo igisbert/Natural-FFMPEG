@@ -12,6 +12,7 @@ use tauri::Emitter;
 use std::os::windows::process::CommandExt;
 
 mod gemini;
+mod ffmpeg_docs;
 
 // Define the Windows-specific creation flag
 #[cfg(not(debug_assertions))]
@@ -246,6 +247,7 @@ async fn generate_command(
     input_paths: Vec<String>,
     output_folder: String,
     model: String,
+    use_docs: bool,
 ) -> Result<String, String> {
     if input_paths.is_empty() {
         return Err("No input files provided.".to_string());
@@ -282,7 +284,24 @@ async fn generate_command(
         Err(_) => None,
     };
 
-    gemini::generate_ffmpeg_command(prompt, api_key, input_paths, output_folder, model, duration)
+    // Search for relevant FFmpeg documentation
+    let relevant_docs = if use_docs {
+        println!("[Generate Command] Buscando docs para el prompt...");
+        match ffmpeg_docs::search_ffmpeg_docs(&prompt, &api_key).await {
+            Ok(docs) => {
+                println!("[Generate Command] Docs encontrados: {} chars", docs.len());
+                docs
+            }
+            Err(e) => {
+                println!("[Generate Command] Error buscando docs: {}", e);
+                String::new()
+            }
+        }
+    } else {
+        String::new()
+    };
+
+    gemini::generate_ffmpeg_command(prompt, api_key, input_paths, output_folder, model, duration, relevant_docs)
         .await
 }
 

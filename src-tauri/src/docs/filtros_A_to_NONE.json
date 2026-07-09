@@ -1,0 +1,16 @@
+[
+  {
+    "id": "anullsink",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Do absolutely nothing with the input audio.",
+    "io": "A->|",
+    "texto": "Filtro: anullsink Descripción: Do absolutely nothing with the input audio. Filter anullsink Do absolutely nothing with the input audio. Inputs: #0: default (audio) Outputs: none (sink filter) Exiting with exit code 0"
+  },
+  {
+    "id": "abuffersink",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Buffer audio frames, and make them available to the end of the filter graph.",
+    "io": "A->|",
+    "texto": "Filtro: abuffersink Descripción: Buffer audio frames, and make them available to the end of the filter graph. Filter abuffersink Buffer audio frames, and make them available to the end of the filter graph. Inputs: #0: default (audio) Outputs: none (sink filter) abuffersink AVOptions: sample_fmts <binary> ..F.A.....P set the supported sample formats sample_rates <binary> ..F.A.....P set the supported sample rates ch_layouts <string> ..F.A.....P set a '|'-separated list of supported channel layouts all_channel_counts <boolean> ..F.A.....P accept all channel counts (default false) sample_formats [<sample_fmt>]..F.A...... array of supported sample formats samplerates [<int> ]..F.A...... array of supported sample formats channel_layouts [<channel_layout>]..F.A...... array of supported channel layouts Exiting with exit code 0"
+  }
+]

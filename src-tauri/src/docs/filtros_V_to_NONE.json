@@ -1,0 +1,16 @@
+[
+  {
+    "id": "nullsink",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Do absolutely nothing with the input video.",
+    "io": "V->|",
+    "texto": "Filtro: nullsink Descripción: Do absolutely nothing with the input video. Filter nullsink Do absolutely nothing with the input video. Inputs: #0: default (video) Outputs: none (sink filter) Exiting with exit code 0"
+  },
+  {
+    "id": "buffersink",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Buffer video frames, and make them available to the end of the filter graph.",
+    "io": "V->|",
+    "texto": "Filtro: buffersink Descripción: Buffer video frames, and make them available to the end of the filter graph. Filter buffersink Buffer video frames, and make them available to the end of the filter graph. Inputs: #0: default (video) Outputs: none (sink filter) buffersink AVOptions: pix_fmts <binary> ..FV......P set the supported pixel formats color_spaces <binary> ..FV......P set the supported color spaces color_ranges <binary> ..FV......P set the supported color ranges pixel_formats [<pix_fmt> ]..FV....... array of supported pixel formats colorspaces [<int> ]..FV....... array of supported color spaces colorranges [<int> ]..FV....... array of supported color ranges Exiting with exit code 0"
+  }
+]

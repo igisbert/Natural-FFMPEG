@@ -1,0 +1,86 @@
+[
+  {
+    "id": "aap",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply Affine Projection algorithm to first audio stream.",
+    "io": "AA->A",
+    "texto": "Filtro: aap Descripción: Apply Affine Projection algorithm to first audio stream. Filter aap Apply Affine Projection algorithm to first audio stream. slice threading supported Inputs: #0: input (audio) #1: desired (audio) Outputs: #0: default (audio) aap AVOptions: order <int> ..F.A...... set the filter order (from 1 to 32767) (default 16) projection <int> ..F.A...... set the filter projection (from 1 to 256) (default 2) mu <float> ..F.A....T. set the filter mu (from 0 to 1) (default 0.0001) delta <float> ..F.A....T. set the filter delta (from 0 to 1) (default 0.001) out_mode <int> ..F.A....T. set output mode (from 0 to 4) (default o) i 0 ..F.A....T. input d 1 ..F.A....T. desired o 2 ..F.A....T. output n 3 ..F.A....T. noise e 4 ..F.A....T. error precision <int> ..F.A...... set processing precision (from 0 to 2) (default auto) auto 0 ..F.A...... set auto processing precision float 1 ..F.A...... set single-floating point processing precision double 2 ..F.A...... set double-floating point processing precision This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "acrossfade",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Cross fade two input audio streams.",
+    "io": "AA->A",
+    "texto": "Filtro: acrossfade Descripción: Cross fade two input audio streams. Filter acrossfade Cross fade two input audio streams. Inputs: #0: crossfade0 (audio) #1: crossfade1 (audio) Outputs: #0: default (audio) acrossfade AVOptions: nb_samples <int64> ..F.A...... set number of samples for cross fade duration (from 1 to 2.14748e+08) (default 44100) ns <int64> ..F.A...... set number of samples for cross fade duration (from 1 to 2.14748e+08) (default 44100) duration <duration> ..F.A...... set cross fade duration (default 0) d <duration> ..F.A...... set cross fade duration (default 0) overlap <boolean> ..F.A...... overlap 1st stream end with 2nd stream start (default true) o <boolean> ..F.A...... overlap 1st stream end with 2nd stream start (default true) curve1 <int> ..F.A...... set fade curve type for 1st stream (from -1 to 22) (default tri) nofade -1 ..F.A...... no fade; keep audio as-is tri 0 ..F.A...... linear slope qsin 1 ..F.A...... quarter of sine wave esin 2 ..F.A...... exponential sine wave hsin 3 ..F.A...... half of sine wave log 4 ..F.A...... logarithmic ipar 5 ..F.A...... inverted parabola qua 6 ..F.A...... quadratic cub 7 ..F.A...... cubic squ 8 ..F.A...... square root cbr 9 ..F.A...... cubic root par 10 ..F.A...... parabola exp 11 ..F.A...... exponential iqsin 12 ..F.A...... inverted quarter of sine wave ihsin 13 ..F.A...... inverted half of sine wave dese 14 ..F.A...... double-exponential seat desi 15 ..F.A...... double-exponential sigmoid losi 16 ..F.A...... logistic sigmoid sinc 17 ..F.A...... sine cardinal function isinc 18 ..F.A...... inverted sine cardinal function quat 19 ..F.A...... quartic quatr 20 ..F.A...... quartic root qsin2 21 ..F.A...... squared quarter of sine wave hsin2 22 ..F.A...... squared half of sine wave c1 <int> ..F.A...... set fade curve type for 1st stream (from -1 to 22) (default tri) nofade -1 ..F.A...... no fade; keep audio as-is tri 0 ..F.A...... linear slope qsin 1 ..F.A...... quarter of sine wave esin 2 ..F.A...... exponential sine wave hsin 3 ..F.A...... half of sine wave log 4 ..F.A...... logarithmic ipar 5 ..F.A...... inverted parabola qua 6 ..F.A...... quadratic cub 7 ..F.A...... cubic squ 8 ..F.A...... square root cbr 9 ..F.A...... cubic root par 10 ..F.A...... parabola exp 11 ..F.A...... exponential iqsin 12 ..F.A...... inverted quarter of sine wave ihsin 13 ..F.A...... inverted half of sine wave dese 14 ..F.A...... double-exponential seat desi 15 ..F.A...... double-exponential sigmoid losi 16 ..F.A...... logistic sigmoid sinc 17 ..F.A...... sine cardinal function isinc 18 ..F.A...... inverted sine cardinal function quat 19 ..F.A...... quartic quatr 20 ..F.A...... quartic root qsin2 21 ..F.A...... squared quarter of sine wave hsin2 22 ..F.A...... squared half of sine wave curve2 <int> ..F.A...... set fade curve type for 2nd stream (from -1 to 22) (default tri) nofade -1 ..F.A...... no fade; keep audio as-is tri 0 ..F.A...... linear slope qsin 1 ..F.A...... quarter of sine wave esin 2 ..F.A...... exponential sine wave hsin 3 ..F.A...... half of sine wave log 4 ..F.A...... logarithmic ipar 5 ..F.A...... inverted parabola qua 6 ..F.A...... quadratic cub 7 ..F.A...... cubic squ 8 ..F.A...... square root cbr 9 ..F.A...... cubic root par 10 ..F.A...... parabola exp 11 ..F.A...... exponential iqsin 12 ..F.A...... inverted quarter of sine wave ihsin 13 ..F.A...... inverted half of sine wave dese 14 ..F.A...... double-exponential seat desi 15 ..F.A...... double-exponential sigmoid losi 16 ..F.A...... logistic sigmoid sinc 17 ..F.A...... sine cardinal function isinc 18 ..F.A...... inverted sine cardinal function quat 19 ..F.A...... quartic quatr 20 ..F.A...... quartic root qsin2 21 ..F.A...... squared quarter of sine wave hsin2 22 ..F.A...... squared half of sine wave c2 <int> ..F.A...... set fade curve type for 2nd stream (from -1 to 22) (default tri) nofade -1 ..F.A...... no fade; keep audio as-is tri 0 ..F.A...... linear slope qsin 1 ..F.A...... quarter of sine wave esin 2 ..F.A...... exponential sine wave hsin 3 ..F.A...... half of sine wave log 4 ..F.A...... logarithmic ipar 5 ..F.A...... inverted parabola qua 6 ..F.A...... quadratic cub 7 ..F.A...... cubic squ 8 ..F.A...... square root cbr 9 ..F.A...... cubic root par 10 ..F.A...... parabola exp 11 ..F.A...... exponential iqsin 12 ..F.A...... inverted quarter of sine wave ihsin 13 ..F.A...... inverted half of sine wave dese 14 ..F.A...... double-exponential seat desi 15 ..F.A...... double-exponential sigmoid losi 16 ..F.A...... logistic sigmoid sinc 17 ..F.A...... sine cardinal function isinc 18 ..F.A...... inverted sine cardinal function quat 19 ..F.A...... quartic quatr 20 ..F.A...... quartic root qsin2 21 ..F.A...... squared quarter of sine wave hsin2 22 ..F.A...... squared half of sine wave Exiting with exit code 0"
+  },
+  {
+    "id": "amultiply",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Multiply two audio streams.",
+    "io": "AA->A",
+    "texto": "Filtro: amultiply Descripción: Multiply two audio streams. Filter amultiply Multiply two audio streams. Inputs: #0: multiply0 (audio) #1: multiply1 (audio) Outputs: #0: default (audio) Exiting with exit code 0"
+  },
+  {
+    "id": "anlmf",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply Normalized Least-Mean-Fourth algorithm to first audio stream.",
+    "io": "AA->A",
+    "texto": "Filtro: anlmf Descripción: Apply Normalized Least-Mean-Fourth algorithm to first audio stream. Filter anlmf Apply Normalized Least-Mean-Fourth algorithm to first audio stream. slice threading supported Inputs: #0: input (audio) #1: desired (audio) Outputs: #0: default (audio) anlm(f|s) AVOptions: order <int> ..F.A...... set the filter order (from 1 to 32767) (default 256) mu <float> ..F.A....T. set the filter mu (from 0 to 2) (default 0.75) eps <float> ..F.A....T. set the filter eps (from 0 to 1) (default 1) leakage <float> ..F.A....T. set the filter leakage (from 0 to 1) (default 0) out_mode <int> ..F.A....T. set output mode (from 0 to 4) (default o) i 0 ..F.A....T. input d 1 ..F.A....T. desired o 2 ..F.A....T. output n 3 ..F.A....T. noise e 4 ..F.A....T. error precision <int> ..F.A...... set processing precision (from 0 to 2) (default auto) auto 0 ..F.A...... set auto processing precision float 1 ..F.A...... set single-floating point processing precision double 2 ..F.A...... set double-floating point processing precision This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "anlms",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply Normalized Least-Mean-Squares algorithm to first audio stream.",
+    "io": "AA->A",
+    "texto": "Filtro: anlms Descripción: Apply Normalized Least-Mean-Squares algorithm to first audio stream. Filter anlms Apply Normalized Least-Mean-Squares algorithm to first audio stream. slice threading supported Inputs: #0: input (audio) #1: desired (audio) Outputs: #0: default (audio) anlm(f|s) AVOptions: order <int> ..F.A...... set the filter order (from 1 to 32767) (default 256) mu <float> ..F.A....T. set the filter mu (from 0 to 2) (default 0.75) eps <float> ..F.A....T. set the filter eps (from 0 to 1) (default 1) leakage <float> ..F.A....T. set the filter leakage (from 0 to 1) (default 0) out_mode <int> ..F.A....T. set output mode (from 0 to 4) (default o) i 0 ..F.A....T. input d 1 ..F.A....T. desired o 2 ..F.A....T. output n 3 ..F.A....T. noise e 4 ..F.A....T. error precision <int> ..F.A...... set processing precision (from 0 to 2) (default auto) auto 0 ..F.A...... set auto processing precision float 1 ..F.A...... set single-floating point processing precision double 2 ..F.A...... set double-floating point processing precision This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "apsnr",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Measure Audio Peak Signal-to-Noise Ratio.",
+    "io": "AA->A",
+    "texto": "Filtro: apsnr Descripción: Measure Audio Peak Signal-to-Noise Ratio. Filter apsnr Measure Audio Peak Signal-to-Noise Ratio. slice threading supported Inputs: #0: input0 (audio) #1: input1 (audio) Outputs: #0: default (audio) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "arls",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply Recursive Least Squares algorithm to first audio stream.",
+    "io": "AA->A",
+    "texto": "Filtro: arls Descripción: Apply Recursive Least Squares algorithm to first audio stream. Filter arls Apply Recursive Least Squares algorithm to first audio stream. slice threading supported Inputs: #0: input (audio) #1: desired (audio) Outputs: #0: default (audio) arls AVOptions: order <int> ..F.A...... set the filter order (from 1 to 32767) (default 16) lambda <float> ..F.A....T. set the filter lambda (from 0 to 1) (default 1) delta <float> ..F.A...... set the filter delta (from 0 to 32767) (default 2) out_mode <int> ..F.A....T. set output mode (from 0 to 4) (default o) i 0 ..F.A....T. input d 1 ..F.A....T. desired o 2 ..F.A....T. output n 3 ..F.A....T. noise e 4 ..F.A....T. error precision <int> ..F.A...... set processing precision (from 0 to 2) (default auto) auto 0 ..F.A...... set auto processing precision float 1 ..F.A...... set single-floating point processing precision double 2 ..F.A...... set double-floating point processing precision This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "asdr",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Measure Audio Signal-to-Distortion Ratio.",
+    "io": "AA->A",
+    "texto": "Filtro: asdr Descripción: Measure Audio Signal-to-Distortion Ratio. Filter asdr Measure Audio Signal-to-Distortion Ratio. slice threading supported Inputs: #0: input0 (audio) #1: input1 (audio) Outputs: #0: default (audio) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "asisdr",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Measure Audio Scale-Invariant Signal-to-Distortion Ratio.",
+    "io": "AA->A",
+    "texto": "Filtro: asisdr Descripción: Measure Audio Scale-Invariant Signal-to-Distortion Ratio. Filter asisdr Measure Audio Scale-Invariant Signal-to-Distortion Ratio. slice threading supported Inputs: #0: input0 (audio) #1: input1 (audio) Outputs: #0: default (audio) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "axcorrelate",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Cross-correlate two audio streams.",
+    "io": "AA->A",
+    "texto": "Filtro: axcorrelate Descripción: Cross-correlate two audio streams. Filter axcorrelate Cross-correlate two audio streams. Inputs: #0: axcorrelate0 (audio) #1: axcorrelate1 (audio) Outputs: #0: default (audio) axcorrelate AVOptions: size <int> ..F.A...... set the segment size (from 2 to 131072) (default 256) algo <int> ..F.A...... set the algorithm (from 0 to 2) (default best) slow 0 ..F.A...... slow algorithm fast 1 ..F.A...... fast algorithm best 2 ..F.A...... best algorithm Exiting with exit code 0"
+  },
+  {
+    "id": "sidechaincompress",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Sidechain compressor.",
+    "io": "AA->A",
+    "texto": "Filtro: sidechaincompress Descripción: Sidechain compressor. Filter sidechaincompress Sidechain compressor. Inputs: #0: main (audio) #1: sidechain (audio) Outputs: #0: default (audio) acompressor/sidechaincompress AVOptions: level_in <double> ..F.A....T. set input gain (from 0.015625 to 64) (default 1) mode <int> ..F.A....T. set mode (from 0 to 1) (default downward) downward 0 ..F.A....T. upward 1 ..F.A....T. threshold <double> ..F.A....T. set threshold (from 0.000976563 to 1) (default 0.125) ratio <double> ..F.A....T. set ratio (from 1 to 20) (default 2) attack <double> ..F.A....T. set attack (from 0.01 to 2000) (default 20) release <double> ..F.A....T. set release (from 0.01 to 9000) (default 250) makeup <double> ..F.A....T. set make up gain (from 1 to 64) (default 1) knee <double> ..F.A....T. set knee (from 1 to 8) (default 2.82843) link <int> ..F.A....T. set link type (from 0 to 1) (default average) average 0 ..F.A....T. maximum 1 ..F.A....T. detection <int> ..F.A....T. set detection (from 0 to 1) (default rms) peak 0 ..F.A....T. rms 1 ..F.A....T. level_sc <double> ..F.A....T. set sidechain gain (from 0.015625 to 64) (default 1) mix <double> ..F.A....T. set mix (from 0 to 1) (default 1) Exiting with exit code 0"
+  },
+  {
+    "id": "sidechaingate",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Audio sidechain gate.",
+    "io": "AA->A",
+    "texto": "Filtro: sidechaingate Descripción: Audio sidechain gate. Filter sidechaingate Audio sidechain gate. Inputs: #0: main (audio) #1: sidechain (audio) Outputs: #0: default (audio) agate/sidechaingate AVOptions: level_in <double> ..F.A....T. set input level (from 0.015625 to 64) (default 1) mode <int> ..F.A....T. set mode (from 0 to 1) (default downward) downward 0 ..F.A....T. upward 1 ..F.A....T. range <double> ..F.A....T. set max gain reduction (from 0 to 1) (default 0.06125) threshold <double> ..F.A....T. set threshold (from 0 to 1) (default 0.125) ratio <double> ..F.A....T. set ratio (from 1 to 9000) (default 2) attack <double> ..F.A....T. set attack (from 0.01 to 9000) (default 20) release <double> ..F.A....T. set release (from 0.01 to 9000) (default 250) makeup <double> ..F.A....T. set makeup gain (from 1 to 64) (default 1) knee <double> ..F.A....T. set knee (from 1 to 8) (default 2.82843) detection <int> ..F.A....T. set detection (from 0 to 1) (default rms) peak 0 ..F.A....T. rms 1 ..F.A....T. link <int> ..F.A....T. set link (from 0 to 1) (default average) average 0 ..F.A....T. maximum 1 ..F.A....T. level_sc <double> ..F.A....T. set sidechain gain (from 0.015625 to 64) (default 1) This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  }
+]

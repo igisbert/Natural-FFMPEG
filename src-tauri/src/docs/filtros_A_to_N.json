@@ -1,0 +1,65 @@
+[
+  {
+    "id": "acrossover",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Split audio into per-bands streams.",
+    "io": "A->N",
+    "texto": "Filtro: acrossover Descripción: Split audio into per-bands streams. Filter acrossover Split audio into per-bands streams. slice threading supported Inputs: #0: default (audio) Outputs: dynamic (depending on the options) acrossover AVOptions: split <string> ..F.A...... set split frequencies (default \"500\") order <int> ..F.A...... set filter order (from 0 to 9) (default 4th) 2nd 0 ..F.A...... 2nd order (12 dB/8ve) 4th 1 ..F.A...... 4th order (24 dB/8ve) 6th 2 ..F.A...... 6th order (36 dB/8ve) 8th 3 ..F.A...... 8th order (48 dB/8ve) 10th 4 ..F.A...... 10th order (60 dB/8ve) 12th 5 ..F.A...... 12th order (72 dB/8ve) 14th 6 ..F.A...... 14th order (84 dB/8ve) 16th 7 ..F.A...... 16th order (96 dB/8ve) 18th 8 ..F.A...... 18th order (108 dB/8ve) 20th 9 ..F.A...... 20th order (120 dB/8ve) level <float> ..F.A...... set input gain (from 0 to 1) (default 1) gain <string> ..F.A...... set output bands gain (default \"1.f\") precision <int> ..F.A...... set processing precision (from 0 to 2) (default auto) auto 0 ..F.A...... set auto processing precision float 1 ..F.A...... set single-floating point processing precision double 2 ..F.A...... set double-floating point processing precision Exiting with exit code 0"
+  },
+  {
+    "id": "aiir",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply Infinite Impulse Response filter with supplied coefficients.",
+    "io": "A->N",
+    "texto": "Filtro: aiir Descripción: Apply Infinite Impulse Response filter with supplied coefficients. Filter aiir Apply Infinite Impulse Response filter with supplied coefficients. slice threading supported Inputs: #0: default (audio) Outputs: dynamic (depending on the options) aiir AVOptions: zeros <string> ..F.A...... set B/numerator/zeros/reflection coefficients (default \"1+0i 1-0i\") z <string> ..F.A...... set B/numerator/zeros/reflection coefficients (default \"1+0i 1-0i\") poles <string> ..F.A...... set A/denominator/poles/ladder coefficients (default \"1+0i 1-0i\") p <string> ..F.A...... set A/denominator/poles/ladder coefficients (default \"1+0i 1-0i\") gains <string> ..F.A...... set channels gains (default \"1|1\") k <string> ..F.A...... set channels gains (default \"1|1\") dry <double> ..F.A...... set dry gain (from 0 to 1) (default 1) wet <double> ..F.A...... set wet gain (from 0 to 1) (default 1) format <int> ..F.A...... set coefficients format (from -2 to 4) (default zp) ll -2 ..F.A...... lattice-ladder function sf -1 ..F.A...... analog transfer function tf 0 ..F.A...... digital transfer function zp 1 ..F.A...... Z-plane zeros/poles pr 2 ..F.A...... Z-plane zeros/poles (polar radians) pd 3 ..F.A...... Z-plane zeros/poles (polar degrees) sp 4 ..F.A...... S-plane zeros/poles f <int> ..F.A...... set coefficients format (from -2 to 4) (default zp) ll -2 ..F.A...... lattice-ladder function sf -1 ..F.A...... analog transfer function tf 0 ..F.A...... digital transfer function zp 1 ..F.A...... Z-plane zeros/poles pr 2 ..F.A...... Z-plane zeros/poles (polar radians) pd 3 ..F.A...... Z-plane zeros/poles (polar degrees) sp 4 ..F.A...... S-plane zeros/poles process <int> ..F.A...... set kind of processing (from 0 to 2) (default s) d 0 ..F.A...... direct s 1 ..F.A...... serial p 2 ..F.A...... parallel r <int> ..F.A...... set kind of processing (from 0 to 2) (default s) d 0 ..F.A...... direct s 1 ..F.A...... serial p 2 ..F.A...... parallel precision <int> ..F.A...... set filtering precision (from 0 to 3) (default dbl) dbl 0 ..F.A...... double-precision floating-point flt 1 ..F.A...... single-precision floating-point i32 2 ..F.A...... 32-bit integers i16 3 ..F.A...... 16-bit integers e <int> ..F.A...... set precision (from 0 to 3) (default dbl) dbl 0 ..F.A...... double-precision floating-point flt 1 ..F.A...... single-precision floating-point i32 2 ..F.A...... 32-bit integers i16 3 ..F.A...... 16-bit integers normalize <boolean> ..F.A...... normalize coefficients (default true) n <boolean> ..F.A...... normalize coefficients (default true) mix <double> ..F.A...... set mix (from 0 to 1) (default 1) response <boolean> ..FV....... show IR frequency response (default false) channel <int> ..FV....... set IR channel to display frequency response (from 0 to 1024) (default 0) size <image_size> ..FV....... set video size (default \"hd720\") rate <video_rate> ..FV....... set video rate (default \"25\") Exiting with exit code 0"
+  },
+  {
+    "id": "anequalizer",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply high-order audio parametric multi band equalizer.",
+    "io": "A->N",
+    "texto": "Filtro: anequalizer Descripción: Apply high-order audio parametric multi band equalizer. Filter anequalizer Apply high-order audio parametric multi band equalizer. slice threading supported Inputs: #0: default (audio) Outputs: dynamic (depending on the options) anequalizer AVOptions: params <string> ..F.A...... (default \"\") curves <boolean> ..FV....... draw frequency response curves (default false) size <image_size> ..FV....... set video size (default \"hd720\") mgain <double> ..FV....... set max gain (from -900 to 900) (default 60) fscale <int> ..FV....... set frequency scale (from 0 to 1) (default log) lin 0 ..FV....... linear log 1 ..FV....... logarithmic colors <string> ..FV....... set channels curves colors (default \"red|green|blue|yellow|orange|lime|pink|magenta|brown\") This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "asegment",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Segment audio stream.",
+    "io": "A->N",
+    "texto": "Filtro: asegment Descripción: Segment audio stream. Filter asegment Segment audio stream. Inputs: #0: default (audio) Outputs: dynamic (depending on the options) asegment AVOptions: timestamps <string> ..F.A...... timestamps of input at which to split input samples <string> ..F.A...... samples at which to split input Exiting with exit code 0"
+  },
+  {
+    "id": "aselect",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Select audio frames to pass in output.",
+    "io": "A->N",
+    "texto": "Filtro: aselect Descripción: Select audio frames to pass in output. Filter aselect Select audio frames to pass in output. Inputs: #0: default (audio) Outputs: dynamic (depending on the options) aselect AVOptions: expr <string> ..F.A...... set an expression to use for selecting frames (default \"1\") e <string> ..F.A...... set an expression to use for selecting frames (default \"1\") outputs <int> ..F.A...... set the number of outputs (from 1 to INT_MAX) (default 1) n <int> ..F.A...... set the number of outputs (from 1 to INT_MAX) (default 1) Exiting with exit code 0"
+  },
+  {
+    "id": "asplit",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Pass on the audio input to N audio outputs.",
+    "io": "A->N",
+    "texto": "Filtro: asplit Descripción: Pass on the audio input to N audio outputs. Filter asplit Pass on the audio input to N audio outputs. Inputs: #0: default (audio) Outputs: dynamic (depending on the options) (a)split AVOptions: outputs <int> ..FVA...... set number of outputs (from 1 to INT_MAX) (default 2) Exiting with exit code 0"
+  },
+  {
+    "id": "channelsplit",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Split audio into per-channel streams.",
+    "io": "A->N",
+    "texto": "Filtro: channelsplit Descripción: Split audio into per-channel streams. Filter channelsplit Split audio into per-channel streams. Inputs: #0: default (audio) Outputs: dynamic (depending on the options) channelsplit AVOptions: channel_layout <channel_layout> ..F.A...... Input channel layout. (default \"stereo\") channels <string> ..F.A...... Channels to extract. (default \"all\") Exiting with exit code 0"
+  },
+  {
+    "id": "ebur128",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "EBU R128 scanner.",
+    "io": "A->N",
+    "texto": "Filtro: ebur128 Descripción: EBU R128 scanner. Filter ebur128 EBU R128 scanner. Inputs: #0: default (audio) Outputs: dynamic (depending on the options) ebur128 AVOptions: video <boolean> ..FV....... set video output (default false) size <image_size> ..FV....... set video size (default \"640x480\") meter <int> ..FV....... set scale meter (+9 to +18) (from 9 to 18) (default 9) framelog <int> ..FVA...... force frame logging level (from INT_MIN to INT_MAX) (default -1) quiet -8 ..FVA...... logging disabled info 32 ..FVA...... information logging level verbose 40 ..FVA...... verbose logging level metadata <boolean> ..FVA...... inject metadata in the filtergraph (default false) peak <flags> ..F.A...... set peak mode (default 0) none ..F.A...... disable any peak mode sample ..F.A...... enable peak-sample mode true ..F.A...... enable true-peak mode dualmono <boolean> ..F.A...... treat mono input files as dual-mono (default false) panlaw <double> ..F.A...... set a specific pan law for dual-mono files (from -10 to 0) (default -3.0103) target <int> ..FV....... set a specific target level in LUFS (-23 to 0) (from -23 to 0) (default -23) gauge <int> ..FV....... set gauge display type (from 0 to 1) (default momentary) momentary 0 ..FV....... display momentary value m 0 ..FV....... display momentary value shortterm 1 ..FV....... display short-term value s 1 ..FV....... display short-term value scale <int> ..FV....... sets display method for the stats (from 0 to 1) (default absolute) absolute 0 ..FV....... display absolute values (LUFS) LUFS 0 ..FV....... display absolute values (LUFS) relative 1 ..FV....... display values relative to target (LU) LU 1 ..FV....... display values relative to target (LU) integrated <double> ..F.A.XR... integrated loudness (LUFS) (from -DBL_MAX to DBL_MAX) (default 0) range <double> ..F.A.XR... loudness range (LU) (from -DBL_MAX to DBL_MAX) (default 0) lra_low <double> ..F.A.XR... LRA low (LUFS) (from -DBL_MAX to DBL_MAX) (default 0) lra_high <double> ..F.A.XR... LRA high (LUFS) (from -DBL_MAX to DBL_MAX) (default 0) sample_peak <double> ..F.A.XR... sample peak (dBFS) (from -DBL_MAX to DBL_MAX) (default 0) true_peak <double> ..F.A.XR... true peak (dBFS) (from -DBL_MAX to DBL_MAX) (default 0) Exiting with exit code 0"
+  },
+  {
+    "id": "aphasemeter",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Convert input audio to phase meter video output.",
+    "io": "A->N",
+    "texto": "Filtro: aphasemeter Descripción: Convert input audio to phase meter video output. Filter aphasemeter Convert input audio to phase meter video output. Inputs: #0: default (audio) Outputs: dynamic (depending on the options) aphasemeter AVOptions: rate <video_rate> ..FV....... set video rate (default \"25\") r <video_rate> ..FV....... set video rate (default \"25\") size <image_size> ..FV....... set video size (default \"800x400\") s <image_size> ..FV....... set video size (default \"800x400\") rc <int> ..FV....... set red contrast (from 0 to 255) (default 2) gc <int> ..FV....... set green contrast (from 0 to 255) (default 7) bc <int> ..FV....... set blue contrast (from 0 to 255) (default 1) mpc <string> ..FV....... set median phase color (default \"none\") video <boolean> ..FV....... set video output (default true) phasing <boolean> ..FV....... set mono and out-of-phase detection output (default false) tolerance <float> ..FV....... set phase tolerance for mono detection (from 0 to 1) (default 0) t <float> ..FV....... set phase tolerance for mono detection (from 0 to 1) (default 0) angle <float> ..FV....... set angle threshold for out-of-phase detection (from 90 to 180) (default 170) a <float> ..FV....... set angle threshold for out-of-phase detection (from 90 to 180) (default 170) duration <duration> ..FV....... set minimum mono or out-of-phase duration in seconds (default 2) d <duration> ..FV....... set minimum mono or out-of-phase duration in seconds (default 2) Exiting with exit code 0"
+  }
+]

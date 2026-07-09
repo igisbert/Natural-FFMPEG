@@ -1,0 +1,51 @@
+[
+  {
+    "id": "afir",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply Finite Impulse Response filter with supplied coefficients in additional stream(s).",
+    "io": "N->A",
+    "texto": "Filtro: afir Descripción: Apply Finite Impulse Response filter with supplied coefficients in additional stream(s). Filter afir Apply Finite Impulse Response filter with supplied coefficients in additional stream(s). slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (audio) afir AVOptions: dry <float> ..F.A....T. set dry gain (from 0 to 10) (default 1) wet <float> ..F.A....T. set wet gain (from 0 to 10) (default 1) length <float> ..F.A...... set IR length (from 0 to 1) (default 1) gtype <int> ..F.A.....P set IR auto gain type (from -1 to 4) (default peak) none -1 ..F.A.....P without auto gain peak 0 ..F.A.....P peak gain dc 1 ..F.A.....P DC gain gn 2 ..F.A.....P gain to noise ac 3 ..F.A.....P AC gain rms 4 ..F.A.....P RMS gain irnorm <float> ..F.A...... set IR norm (from -1 to 2) (default 1) irlink <boolean> ..F.A...... set IR link (default true) irgain <float> ..F.A...... set IR gain (from 0 to 1) (default 1) irfmt <int> ..F.A...... set IR format (from 0 to 1) (default input) mono 0 ..F.A...... single channel input 1 ..F.A...... same as input maxir <float> ..F.A...... set max IR length (from 0.1 to 60) (default 30) response <boolean> ..FV......P show IR frequency response (default false) channel <int> ..FV......P set IR channel to display frequency response (from 0 to 1024) (default 0) size <image_size> ..FV......P set video size (default \"hd720\") rate <video_rate> ..FV......P set video rate (default \"25\") minp <int> ..F.A...... set min partition size (from 1 to 65536) (default 8192) maxp <int> ..F.A...... set max partition size (from 8 to 65536) (default 8192) nbirs <int> ..F.A...... set number of input IRs (from 1 to 32) (default 1) ir <int> ..F.A....T. select IR (from 0 to 31) (default 0) precision <int> ..F.A...... set processing precision (from 0 to 2) (default auto) auto 0 ..F.A...... set auto processing precision float 1 ..F.A...... set single-floating point processing precision double 2 ..F.A...... set double-floating point processing precision irload <int> ..F.A...... set IR loading type (from 0 to 1) (default init) init 0 ..F.A...... load all IRs on init access 1 ..F.A...... load IR on access This filter has support for timeline through the 'enable' option. Exiting with exit code 0"
+  },
+  {
+    "id": "ainterleave",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Temporally interleave audio inputs.",
+    "io": "N->A",
+    "texto": "Filtro: ainterleave Descripción: Temporally interleave audio inputs. Filter ainterleave Temporally interleave audio inputs. Inputs: dynamic (depending on the options) Outputs: #0: default (audio) ainterleave AVOptions: nb_inputs <int> ..F.A...... set number of inputs (from 1 to INT_MAX) (default 2) n <int> ..F.A...... set number of inputs (from 1 to INT_MAX) (default 2) duration <int> ..F.A...... how to determine the end-of-stream (from 0 to 2) (default longest) longest 0 ..F.A...... Duration of longest input shortest 1 ..F.A...... Duration of shortest input first 2 ..F.A...... Duration of first input Exiting with exit code 0"
+  },
+  {
+    "id": "amerge",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Merge two or more audio streams into a single multi-channel stream.",
+    "io": "N->A",
+    "texto": "Filtro: amerge Descripción: Merge two or more audio streams into a single multi-channel stream. Filter amerge Merge two or more audio streams into a single multi-channel stream. Inputs: dynamic (depending on the options) Outputs: #0: default (audio) amerge AVOptions: inputs <int> ..F.A...... specify the number of inputs (from 1 to 64) (default 2) Exiting with exit code 0"
+  },
+  {
+    "id": "amix",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Audio mixing.",
+    "io": "N->A",
+    "texto": "Filtro: amix Descripción: Audio mixing. Filter amix Audio mixing. Inputs: dynamic (depending on the options) Outputs: #0: default (audio) amix AVOptions: inputs <int> ..F.A...... Number of inputs. (from 1 to 32767) (default 2) duration <int> ..F.A...... How to determine the end-of-stream. (from 0 to 2) (default longest) longest 0 ..F.A...... Duration of longest input. shortest 1 ..F.A...... Duration of shortest input. first 2 ..F.A...... Duration of first input. dropout_transition <float> ..F.A...... Transition time, in seconds, for volume renormalization when an input stream ends. (from 0 to INT_MAX) (default 2) weights <string> ..F.A....T. Set weight for each input. (default \"1 1\") normalize <boolean> ..F.A....T. Scale inputs (default true) Exiting with exit code 0"
+  },
+  {
+    "id": "headphone",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply headphone binaural spatialization with HRTFs in additional streams.",
+    "io": "N->A",
+    "texto": "Filtro: headphone Descripción: Apply headphone binaural spatialization with HRTFs in additional streams. Filter headphone Apply headphone binaural spatialization with HRTFs in additional streams. slice threading supported Inputs: dynamic (depending on the options) Outputs: #0: default (audio) headphone AVOptions: map <string> ..F.A...... set channels convolution mappings gain <float> ..F.A...... set gain in dB (from -20 to 40) (default 0) lfe <float> ..F.A...... set lfe gain in dB (from -20 to 40) (default 0) type <int> ..F.A...... set processing (from 0 to 1) (default freq) time 0 ..F.A...... time domain freq 1 ..F.A...... frequency domain size <int> ..F.A...... set frame size (from 1024 to 96000) (default 1024) hrir <int> ..F.A...... set hrir format (from 0 to 1) (default stereo) stereo 0 ..F.A...... hrir files have exactly 2 channels multich 1 ..F.A...... single multichannel hrir file Exiting with exit code 0"
+  },
+  {
+    "id": "join",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Join multiple audio streams into multi-channel output.",
+    "io": "N->A",
+    "texto": "Filtro: join Descripción: Join multiple audio streams into multi-channel output. Filter join Join multiple audio streams into multi-channel output. Inputs: dynamic (depending on the options) Outputs: #0: default (audio) join AVOptions: inputs <int> ..F.A...... Number of input streams. (from 1 to INT_MAX) (default 2) channel_layout <channel_layout> ..F.A...... Channel layout of the output stream. (default \"stereo\") map <string> ..F.A...... A comma-separated list of channels maps in the format 'input_stream.input_channel-output_channel. Exiting with exit code 0"
+  },
+  {
+    "id": "ladspa",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Apply LADSPA effect.",
+    "io": "N->A",
+    "texto": "Filtro: ladspa Descripción: Apply LADSPA effect. Filter ladspa Apply LADSPA effect. Inputs: dynamic (depending on the options) Outputs: #0: default (audio) ladspa AVOptions: file <string> ..F.A...... set library name or full path f <string> ..F.A...... set library name or full path plugin <string> ..F.A...... set plugin name p <string> ..F.A...... set plugin name controls <string> ..F.A...... set plugin options c <string> ..F.A...... set plugin options sample_rate <int> ..F.A...... set sample rate (from 1 to INT_MAX) (default 44100) s <int> ..F.A...... set sample rate (from 1 to INT_MAX) (default 44100) nb_samples <int> ..F.A...... set the number of samples per requested frame (from 1 to INT_MAX) (default 1024) n <int> ..F.A...... set the number of samples per requested frame (from 1 to INT_MAX) (default 1024) duration <duration> ..F.A...... set audio duration (default -0.000001) d <duration> ..F.A...... set audio duration (default -0.000001) latency <boolean> ..F.A...... enable latency compensation (default false) l <boolean> ..F.A...... enable latency compensation (default false) Exiting with exit code 0"
+  }
+]

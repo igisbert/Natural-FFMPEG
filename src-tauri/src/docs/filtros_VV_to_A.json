@@ -1,0 +1,9 @@
+[
+  {
+    "id": "spectrumsynth",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Convert input spectrum videos to audio output.",
+    "io": "VV->A",
+    "texto": "Filtro: spectrumsynth Descripción: Convert input spectrum videos to audio output. Filter spectrumsynth Convert input spectrum videos to audio output. Inputs: #0: magnitude (video) #1: phase (video) Outputs: #0: default (audio) spectrumsynth AVOptions: sample_rate <int> ..F.A...... set sample rate (from 15 to INT_MAX) (default 44100) channels <int> ..F.A...... set channels (from 1 to 8) (default 1) scale <int> ..FV....... set input amplitude scale (from 0 to 1) (default log) lin 0 ..FV....... linear log 1 ..FV....... logarithmic slide <int> ..FV....... set input sliding mode (from 0 to 3) (default fullframe) replace 0 ..FV....... consume old columns with new scroll 1 ..FV....... consume only most right column fullframe 2 ..FV....... consume full frames rscroll 3 ..FV....... consume only most left column win_func <int> ..F.A...... set window function (from 0 to 20) (default rect) rect 0 ..F.A...... Rectangular bartlett 4 ..F.A...... Bartlett hann 1 ..F.A...... Hann hanning 1 ..F.A...... Hanning hamming 2 ..F.A...... Hamming blackman 3 ..F.A...... Blackman welch 5 ..F.A...... Welch flattop 6 ..F.A...... Flat-top bharris 7 ..F.A...... Blackman-Harris bnuttall 8 ..F.A...... Blackman-Nuttall bhann 11 ..F.A...... Bartlett-Hann sine 9 ..F.A...... Sine nuttall 10 ..F.A...... Nuttall lanczos 12 ..F.A...... Lanczos gauss 13 ..F.A...... Gauss tukey 14 ..F.A...... Tukey dolph 15 ..F.A...... Dolph-Chebyshev cauchy 16 ..F.A...... Cauchy parzen 17 ..F.A...... Parzen poisson 18 ..F.A...... Poisson bohman 19 ..F.A...... Bohman kaiser 20 ..F.A...... Kaiser overlap <float> ..F.A...... set window overlap (from 0 to 1) (default 1) orientation <int> ..FV....... set orientation (from 0 to 1) (default vertical) vertical 0 ..FV....... horizontal 1 ..FV....... Exiting with exit code 0"
+  }
+]

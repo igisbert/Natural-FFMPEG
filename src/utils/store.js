@@ -54,4 +54,5 @@ export const SECRET_KEYS = {
   NOTIFICATIONS_ENABLED: "notifications_enabled",
   COMMAND_HISTORY_RECENT: "command_history_recent",
   COMMAND_HISTORY_SAVED: "command_history_saved",
+  FFMPEG_DOCS_ENABLED: "ffmpeg_docs_enabled",
 };

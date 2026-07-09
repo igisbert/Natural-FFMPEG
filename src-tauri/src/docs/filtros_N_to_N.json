@@ -1,0 +1,23 @@
+[
+  {
+    "id": "astreamselect",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Select audio streams",
+    "io": "N->N",
+    "texto": "Filtro: astreamselect Descripción: Select audio streams Filter astreamselect Select audio streams Inputs: dynamic (depending on the options) Outputs: dynamic (depending on the options) (a)streamselect AVOptions: inputs <int> ..FVA...... number of input streams (from 2 to INT_MAX) (default 2) map <string> ..FVA....T. input indexes to remap to outputs Exiting with exit code 0"
+  },
+  {
+    "id": "streamselect",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Select video streams",
+    "io": "N->N",
+    "texto": "Filtro: streamselect Descripción: Select video streams Filter streamselect Select video streams Inputs: dynamic (depending on the options) Outputs: dynamic (depending on the options) (a)streamselect AVOptions: inputs <int> ..FVA...... number of input streams (from 2 to INT_MAX) (default 2) map <string> ..FVA....T. input indexes to remap to outputs Exiting with exit code 0"
+  },
+  {
+    "id": "concat",
+    "tipo": "filtro-ffmpeg",
+    "resumen": "Concatenate audio and video streams.",
+    "io": "N->N",
+    "texto": "Filtro: concat Descripción: Concatenate audio and video streams. Filter concat Concatenate audio and video streams. Inputs: dynamic (depending on the options) Outputs: dynamic (depending on the options) concat AVOptions: n <int> ..FVA...... specify the number of segments (from 1 to INT_MAX) (default 2) v <int> ..FV....... specify the number of video streams (from 0 to INT_MAX) (default 1) a <int> ..F.A...... specify the number of audio streams (from 0 to INT_MAX) (default 0) unsafe <boolean> ..FVA...... enable unsafe mode (default false) Exiting with exit code 0"
+  }
+]
