@@ -14,13 +14,17 @@ export default function Presets({
     setShowPresets(false);
   };
 
-  const handlePresetClick = (description) => {
-    onPresetSelect(description);
+  const handlePresetClick = (preset) => {
+    let prompt = preset.description;
+    if (preset.filter) {
+      prompt += `( ${preset.filter})`;
+    }
+    onPresetSelect(prompt);
     setShowPresets(false);
   };
 
   const filteredPresets = presets.filter(
-    (preset) => preset.category === activeCategory
+    (preset) => preset.category === activeCategory,
   );
 
   return (
@@ -52,7 +56,7 @@ export default function Presets({
             <button
               key={index}
               className={style.presetCard}
-              onClick={() => handlePresetClick(preset.description)}
+              onClick={() => handlePresetClick(preset)}
               type="button"
             >
               <span className={style.presetTitle}>{preset.title}</span>
