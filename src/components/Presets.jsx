@@ -7,6 +7,7 @@ export default function Presets({
   showPresets,
   setShowPresets,
   onPresetSelect,
+  disabled,
 }) {
   const [activeCategory, setActiveCategory] = useState(CATEGORIES.VIDEO);
 
@@ -15,6 +16,7 @@ export default function Presets({
   };
 
   const handlePresetClick = (preset) => {
+    if (disabled) return;
     let prompt = preset.description;
     if (preset.filter) {
       prompt += `( ${preset.filter})`;
@@ -55,9 +57,10 @@ export default function Presets({
           {filteredPresets.map((preset, index) => (
             <button
               key={index}
-              className={style.presetCard}
+              className={`${style.presetCard} ${disabled ? style.disabled : ""}`}
               onClick={() => handlePresetClick(preset)}
               type="button"
+              disabled={disabled}
             >
               <span className={style.presetTitle}>{preset.title}</span>
               <span className={style.presetDescription}>

@@ -7,7 +7,6 @@ import InstallFFmpeg from "./components/InstallFFmpeg";
 import AddAPIKey from "./components/AddAPIKey";
 import ConfigFooter from "./components/ConfigFooter";
 import Application from "./components/Application";
-import Presets from "./components/Presets";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
 import "./reset.css";
@@ -66,11 +65,6 @@ function App() {
       {ffmpegInstalled && apiKey && (
         <ConfigFooter apiKey={apiKey} setApiKey={setApiKey} />
       )}
-      <Presets
-        showPresets={showPresets}
-        setShowPresets={setShowPresets}
-        onPresetSelect={setCommandInput}
-      />
     </main>
   );
 }

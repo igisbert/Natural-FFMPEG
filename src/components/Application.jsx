@@ -8,6 +8,7 @@ import CodeBlock from "./CodeBlock";
 import ExecutionFeedback from "./ExecutionFeedback";
 import ErrorDialog from "./ErrorDialog";
 import CommandHistory from "./CommandHistory";
+import Presets from "./Presets";
 import { getSecret, setSecret, SECRET_KEYS } from "../utils/store";
 
 import style from "./Application.module.css";
@@ -393,6 +394,12 @@ export default function Application({
         onClose={() => setHistoryOpen(false)}
         onReimagine={handleReimagine}
         onExecute={runCommand}
+      />
+      <Presets
+        showPresets={showPresets}
+        setShowPresets={setShowPresets}
+        onPresetSelect={setCommandInput}
+        disabled={execution.status === "starting" || execution.status === "running"}
       />
     </>
   );

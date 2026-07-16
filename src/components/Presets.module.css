@@ -138,6 +138,18 @@
   filter: brightness(1.2);
 }
 
+.presetCard:disabled,
+.presetCard.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.presetCard:disabled:hover,
+.presetCard.disabled:hover {
+  border-color: rgb(from var(--color) r g b / 0.1);
+  filter: none;
+}
+
 .presetDescription {
   font-size: 1rem;
   color: rgb(from var(--color) r g b / 0.7);

@@ -10,6 +10,7 @@ export default function Input({
   onPresetsClick,
   value,
   onInput,
+  disabled,
   ...props
 }) {
   return (
@@ -22,6 +23,7 @@ export default function Input({
         autocomplete="off"
         value={value}
         onInput={onInput}
+        disabled={disabled}
         {...props}
       />
       {showPresetsButton && (
@@ -29,6 +31,7 @@ export default function Input({
           className={styles.button}
           onClick={onPresetsClick}
           type="button"
+          disabled={disabled}
         >
           <Gem size={32} stroke-width={2} />
         </button>
